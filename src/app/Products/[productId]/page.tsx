@@ -276,16 +276,16 @@ export default function ProductDetailPage() {
                 <div className="single-pro-tab-menu">
                   <ul className="nav d-block">
                     <li>
-                      <a href="#description" data-bs-toggle="tab">
+                      <a
+                        href="#description"
+                        className="active"
+                        data-bs-toggle="tab"
+                      >
                         Description
                       </a>
                     </li>
                     <li>
-                      <a
-                        className="active"
-                        href="#reviews"
-                        data-bs-toggle="tab"
-                      >
+                      <a href="#reviews" data-bs-toggle="tab">
                         Reviews
                       </a>
                     </li>
@@ -304,32 +304,15 @@ export default function ProductDetailPage() {
               </div>
               <div className="col-md-9">
                 <div className="tab-content">
-                  <div className="tab-pane" id="description">
+                  <div className="tab-pane active" id="description">
                     <div className="pro-tab-info pro-description">
                       <h3 className="tab-title title-border mb-30">
                         {product.name}
                       </h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer accumsan egestas elese ifend. Phasellus a felis
-                        at est bibendum feugiat ut eget eni Praesent et messages
-                        in con sectetur posuere dolor non.
-                      </p>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer accumsan egestas elese ifend. Phasellus a felis
-                        at est bibendum feugiat ut eget eni Praesent et messages
-                        in con sectetur posuere dolor non.
-                      </p>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer accumsan egestas elese ifend. Phasellus a felis
-                        at est bibendum feugiat ut eget eni Praesent et messages
-                        in con sectetur posuere dolor non.
-                      </p>
+                      <p>{product.description} </p>
                     </div>
                   </div>
-                  <div className="tab-pane active" id="reviews">
+                  <div className="tab-pane" id="reviews">
                     <div className="pro-tab-info pro-reviews">
                       <div className="customer-review mb-60">
                         <h3 className="tab-title title-border mb-30">

@@ -15,7 +15,7 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
   return (
     <div className="shop-pagination text-center">
-      <div className="pagination">
+      <div className="pagination" style={{ background: "transparent" }}>
         <ul>
           <li>
             <a
@@ -44,7 +44,6 @@ const Pagination: React.FC<PaginationProps> = ({
           ))}
           <li>
             <a
-              
               onClick={(event) => {
                 event.preventDefault();
                 if (currentPage < totalPages) onPageChange(currentPage + 1);

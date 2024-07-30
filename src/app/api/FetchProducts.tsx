@@ -175,7 +175,7 @@ const ProductPage = () => {
                         <span className={`pro-label ${product.label}-label`}>
                           {product.label}
                         </span>
-                        <span className="pro-price-2">{product.price}</span>
+                        <span className="pro-price-2">${product.price}</span>
                         <a href="single-product.html">
                           <img src={product.imgSrc} alt={product.name} />
                         </a>
@@ -204,7 +204,7 @@ const ProductPage = () => {
                             <FavoriteBorder />
                           </a>
                           <a
-                            href=""
+                            href={`Products/${product.id}`}
                             data-bs-toggle="modal"
                             data-bs-target="#productModal"
                             title="Quick View"
@@ -220,12 +220,13 @@ const ProductPage = () => {
               ))}
             </div>
           )}
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
       </div>
     </>
   );

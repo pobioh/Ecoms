@@ -169,31 +169,28 @@ export default function CartPreview() {
                                         </td>
                                         <td className="product-quantity">
                                           <div className="cart-plus-minus">
-                                            <button
-                                              type="button"
+                                            <div
+                                              className="dec qtybutton"
                                               onClick={() =>
                                                 decrementQuantity(index)
                                               }
-                                              className="cart-minus"
                                             >
                                               -
-                                            </button>
+                                            </div>
                                             <input
-                                              type="number"
+                                              type="text"
                                               value={item.quantity}
-                                              min="1"
-                                              readOnly
+                                              name="qtybutton"
                                               className="cart-plus-minus-box"
                                             />
-                                            <button
-                                              type="button"
+                                            <div
+                                              className="inc qtybutton"
                                               onClick={() =>
                                                 incrementQuantity(index)
                                               }
-                                              className="cart-plus"
                                             >
                                               +
-                                            </button>
+                                            </div>
                                           </div>
                                         </td>
                                         <td className="product-subtotal">
