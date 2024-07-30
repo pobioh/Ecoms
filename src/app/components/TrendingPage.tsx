@@ -1,5 +1,5 @@
 // pages/products.tsx
-import Product from "./products/page";
+import Product from "./TrendingProduct/page";
 
 const products = [
   {
@@ -37,7 +37,7 @@ const TrendingPage: React.FC = () => {
         <div className="row">
           <div className="col-lg-12">
             <div className="section-title text-center">
-              <h2 className="title-border">Trending Products</h2>
+              <h2 className="title-border">Trendings Products</h2>
             </div>
             <div className="product-slider style-1 arrow-left-right">
               <div className="row">

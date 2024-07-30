@@ -5,6 +5,7 @@ import Discount from "../components/Discount";
 import Subscription from "../components/Subscribe";
 import SectionMenu from "../components/Section";
 import ProductsPage from "../components/TrendingPage";
+import AllProducts from "../components/Products";
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
       <SectionMenu />
       <ProductsPage />
       <Discount />
+      <AllProducts />
       <Subscription />
       <Footer />
     </>

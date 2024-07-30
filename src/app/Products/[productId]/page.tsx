@@ -6,10 +6,10 @@ import HeaderPage from "@/app/components/header/header";
 import Footer from "@/app/components/footer/footer";
 import "./style.css";
 import ImageModal from "./modal";
-import { FavoriteBorder, ShoppingBag, ZoomIn } from "@mui/icons-material";
-import { Zoom } from "@mui/material";
+import { FavoriteBorder, Search, ZoomIn } from "@mui/icons-material";
 import Link from "next/link";
 import HandleBack from "@/app/components/BackButton";
+import AddToCartBtn from "@/app/components/CartIcon";
 
 export default function ProductDetailPage() {
   const { productId } = useParams(); // Get the product ID from the URL
@@ -71,8 +71,6 @@ export default function ProductDetailPage() {
     }
   };
 
- 
-
   return (
     <>
       <HeaderPage />
@@ -111,62 +109,18 @@ export default function ProductDetailPage() {
                     <img src={`/${product.imgSrc}`} alt={product.imgSrc} />
                     <a
                       className="view-full-screen"
-                      href="img/single-product/large/1.jpg"
+                      href="#"
                       data-lightbox="roadtrip"
                       data-title="My caption"
                     >
-                      <i className="zmdi zmdi-zoom-in"></i>
-                    </a>
-                  </div>
-                  <div>
-                    <img src="img/single-product/medium/2.jpg" alt="" />
-                    <a
-                      className="view-full-screen"
-                      href="img/single-product/large/2.jpg"
-                      data-lightbox="roadtrip"
-                      data-title="My caption"
-                    >
-                      <i className="zmdi zmdi-zoom-in"></i>
-                    </a>
-                  </div>
-                  <div>
-                    <img src="img/single-product/medium/3.jpg" alt="" />
-                    <a
-                      className="view-full-screen"
-                      href="img/single-product/large/3.jpg"
-                      data-lightbox="roadtrip"
-                      data-title="My caption"
-                    >
-                      <i className="zmdi zmdi-zoom-in"></i>
-                    </a>
-                  </div>
-                  <div>
-                    <img src="img/single-product/medium/4.jpg" alt="" />
-                    <a
-                      className="view-full-screen"
-                      href="img/single-product/large/4.jpg"
-                      data-lightbox="roadtrip"
-                      data-title="My caption"
-                    >
-                      <i className="zmdi zmdi-zoom-in"></i>
-                    </a>
-                  </div>
-                  <div>
-                    <img src="img/single-product/medium/5.jpg" alt="" />
-                    <a
-                      className="view-full-screen"
-                      href="img/single-product/large/5.jpg"
-                      data-lightbox="roadtrip"
-                      data-title="My caption"
-                    >
-                      <i className="zmdi zmdi-zoom-in"></i>
+                      <Search />
                     </a>
                   </div>
                 </div>
 
                 <div className="product-info">
                   <div className="fix">
-                    <h4 className="post-title floatleft">dummy Product name</h4>
+                    <h4 className="post-title floatleft">{product.name}</h4>
                     <span className="pro-rating floatright">
                       <a href="#">⭐</a>
                       <a href="#">⭐</a>
@@ -177,7 +131,7 @@ export default function ProductDetailPage() {
                     </span>
                   </div>
                   <div className="fix mb-20">
-                    <span className="pro-price">$ 56.20</span>
+                    <span className="pro-price">{product.price}</span>
                   </div>
                   <div className="product-description">
                     <p>{product.description} </p>
@@ -259,7 +213,7 @@ export default function ProductDetailPage() {
 
                     <div className="product-action clearfix">
                       <a
-                        href="wishlist.html"
+                        href="#"
                         data-bs-toggle="tooltip"
                         data-placement="top"
                         title="Wishlist"
@@ -275,14 +229,12 @@ export default function ProductDetailPage() {
                         <ZoomIn />
                       </a>
 
-                      <a
-                        href="cart.html"
-                        data-bs-toggle="tooltip"
-                        data-placement="top"
-                        title="Add To Cart"
-                      >
-                        <ShoppingBag />
-                      </a>
+                      <AddToCartBtn
+                        imgSrc={`/${product.imgSrc}`}
+                        title={product.name}
+                        price={product.price.toString()} // Ensure price is a string
+                        rating={product.rating}
+                      />
                     </div>
                   </div>
                   <div className="slider-container">
@@ -355,7 +307,7 @@ export default function ProductDetailPage() {
                   <div className="tab-pane" id="description">
                     <div className="pro-tab-info pro-description">
                       <h3 className="tab-title title-border mb-30">
-                        dummy Product name
+                        {product.name}
                       </h3>
                       <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.

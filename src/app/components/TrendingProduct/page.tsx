@@ -57,16 +57,11 @@ const Product: React.FC<ProductProps> = ({
             >
               <FavoriteBorder />
             </a>
-            <a
-              href="#"
-              data-bs-toggle="modal"
-              data-bs-target="#productModal"
-              title="Quick View"
-            >
+            <Link href="/Products/1" title="Quick View">
               <Visibility />
-            </a>
+            </Link>
             <a
-              href="#"
+              style={{ cursor: "pointer" }}
               onClick={handleAddToCart}
               data-bs-toggle="tooltip"
               data-placement="top"

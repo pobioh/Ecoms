@@ -11,8 +11,7 @@ import {
   Slider,
   Typography,
 } from "@mui/material";
-import ProductGrid from "../api/FetchProducts";
-import Link from "next/link";
+import ProductGrid from "../api/fetchProducts";
 
 export default function AllProducts() {
   const [value, setValue] = useState([10, 5000]);
@@ -26,29 +25,7 @@ export default function AllProducts() {
 
   return (
     <>
-      <div className="heading-banner-area overlay-bg">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <div className="heading-banner">
-                <div className="heading-banner-title">
-                  <h2>ALl Product </h2>
-                </div>
-                <div className="breadcumbs pb-15">
-                  <ul>
-                    <li>
-                      <Link href="../">Home</Link>
-                    </li>
-                    <li>Product grid view</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="product-area pt-10 pb-80 product-style-2">
+      <div className="product-area pt-10 product-style-2">
         <div className="container">
           <div className="row">
             <div className="col-lg-3 order-lg-1">

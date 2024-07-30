@@ -19,7 +19,6 @@ const Pagination: React.FC<PaginationProps> = ({
         <ul>
           <li>
             <a
-              href="#"
               onClick={(event) => {
                 event.preventDefault();
                 if (currentPage > 1) onPageChange(currentPage - 1);
@@ -45,7 +44,7 @@ const Pagination: React.FC<PaginationProps> = ({
           ))}
           <li>
             <a
-              href="#"
+              
               onClick={(event) => {
                 event.preventDefault();
                 if (currentPage < totalPages) onPageChange(currentPage + 1);

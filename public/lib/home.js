@@ -16,7 +16,7 @@
     controlNavThumbs: false,
     pauseOnHover: false,
     controlNav: true,
-    prevText: ">",
-    nextText: "<",
+    prevText: "<",
+    nextText: ">",
   });
 })(jQuery);

@@ -2,7 +2,7 @@ export default function Subscription() {
   return (
     <>
       <center>
-        <div className="subscribe-area pt-80 py-24 pt-10">
+        <div className="subscribe-area pt-10 py-24">
           <div className="container">
             <div className="row">
               <div className="col-lg-12">

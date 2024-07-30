@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Apps,
-  FavoriteBorder,
-  SearchOff,
-  ShoppingBag,
-  ViewList,
-} from "@mui/icons-material";
+import { Apps, FavoriteBorder, SearchOff, ViewList } from "@mui/icons-material";
 import PriceRange from "../components/PriceRange";
 import Pagination from "../components/Pagination"; // Import the new Pagination component
 import Link from "next/link";
+import StarRateIcon from "@mui/icons-material/StarRate";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
+import AddToCartBtn from "../components/CartIcon";
 
 const ProductPage = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -35,7 +32,7 @@ const ProductPage = () => {
   const productsPerPage = 5;
 
   const filteredProducts = products.filter((product) => {
-    const price = parseFloat(product.price.replace("$", ""));
+    const price = parseFloat(product.price);
     return price >= priceRange[0] && price <= priceRange[1];
   });
 
@@ -57,6 +54,18 @@ const ProductPage = () => {
 
   const handleProductClick = (productId: number) => {
     router.push(`/Products/${productId}`);
+  };
+
+  const renderStars = (rating: number) => {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < rating) {
+        stars.push(<StarRateIcon key={i} />);
+      } else {
+        stars.push(<StarOutlineIcon key={i} />);
+      }
+    }
+    return stars;
   };
 
   return (
@@ -104,7 +113,7 @@ const ProductPage = () => {
                         <span className={`pro-label ${product.label}-label`}>
                           {product.label}
                         </span>
-                        <span className="pro-price-2">{product.price}</span>
+                        <span className="pro-price-2">${product.price}</span>
                         <Link
                           href="Products"
                           onClick={() => handleProductClick(product.id)}
@@ -120,22 +129,13 @@ const ProductPage = () => {
                         </div>
                         <div className="fix">
                           <span className="pro-rating">
-                            {[...Array(5)].map((_, i) => (
-                              <a href="#" key={i}>
-                                <i
-                                  className={`zmdi zmdi-star${
-                                    i < Math.floor(product.rating)
-                                      ? ""
-                                      : "-half"
-                                  }`}
-                                ></i>
-                              </a>
-                            ))}
+                            {renderStars(product.rating)}
+                            <span>({product.rating} Rating)</span>
                           </span>
                         </div>
                         <div className="product-action clearfix">
                           <a
-                            href="wishlist.html"
+                            href="#"
                             data-bs-toggle="tooltip"
                             data-placement="top"
                             title="Wishlist"
@@ -143,12 +143,20 @@ const ProductPage = () => {
                             <FavoriteBorder />
                           </a>
                           <a
-                            href="#"
+                            href={`Products/${product.id}`}
                             data-bs-toggle="modal"
                             data-bs-target="#productModal"
                             title="Quick View"
                           >
                             <SearchOff />
+                          </a>
+                          <a className="pl-8" title="Quick View">
+                            <AddToCartBtn
+                              imgSrc={`/${product.imgSrc}`}
+                              title={product.name}
+                              price={product.price.toString()} // Ensure price is a string
+                              rating={product.rating}
+                            />
                           </a>
                         </div>
                       </div>
@@ -182,22 +190,13 @@ const ProductPage = () => {
                         </div>
                         <div className="fix">
                           <span className="pro-rating">
-                            {[...Array(5)].map((_, i) => (
-                              <a href="#" key={i}>
-                                <i
-                                  className={`zmdi zmdi-star${
-                                    i < Math.floor(product.rating)
-                                      ? ""
-                                      : "-half"
-                                  }`}
-                                ></i>
-                              </a>
-                            ))}
+                            {renderStars(product.rating)}
+                            <span>({product.rating} Rating)</span>
                           </span>
                         </div>
                         <div className="product-action clearfix">
                           <a
-                            href="wishlist.html"
+                            href="#"
                             data-bs-toggle="tooltip"
                             data-placement="top"
                             title="Wishlist"
@@ -205,7 +204,7 @@ const ProductPage = () => {
                             <FavoriteBorder />
                           </a>
                           <a
-                            href="#"
+                            href=""
                             data-bs-toggle="modal"
                             data-bs-target="#productModal"
                             title="Quick View"
@@ -213,15 +212,7 @@ const ProductPage = () => {
                             <SearchOff />
                           </a>
                         </div>
-                        <p className="mt-10">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Donec euismod, nisi vel consectetur interdum,
-                          nisl nisi dignissim risus, a ultricies risus eros ac
-                          sapien. Quisque tempor justo at sollicitudin finibus.
-                          Donec consequat massa vel ex porttitor, at varius dui
-                          bibendum. Donec non arcu vehicula, malesuada turpis
-                          sit amet, luctus nulla.
-                        </p>
+                        <p className="mt-10">{product.description}</p>
                       </div>
                     </div>
                   </div>

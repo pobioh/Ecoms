@@ -5,3 +5,26 @@
 * {
   font-family: "Pacifico", cursive;
 }
+
+.cart-center {
+  position: fixed;
+  bottom: 30rem;
+  right: 1.3rem;
+  cursor: pointer;
+  padding: 1.5rem; /* Reduced padding */
+  line-height: 1.5rem; /* Reduced line-height */
+  font-size: 10.5rem; /* Reduced font-size */
+  font-weight: 600;
+  z-index: 9999; /* High z-index to appear above other content */
+  animation: zoomInOut 3s infinite ease-in-out;
+}
+
+@keyframes zoomInOut {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1); /* Adjust scale as needed */
+  }
+}
