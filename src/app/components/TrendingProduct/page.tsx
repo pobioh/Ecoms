@@ -12,6 +12,7 @@ import {
 } from "@mui/icons-material";
 import { useCart } from "../CartContext"; // Adjust the path accordingly
 
+// Define the ProductProps interface
 interface ProductProps {
   imgSrc: string;
   title: string;
@@ -38,9 +39,12 @@ const Product: React.FC<ProductProps> = ({
   const handleAddToCart = () => {
     const numericPrice = parsePrice(price);
     addToCart({
-      imgSrc, title, price: numericPrice, quantity: 1,
+      imgSrc,
+      title,
+      price: numericPrice,
+      quantity: 1,
       color: undefined,
-      size: undefined
+      size: undefined,
     });
   };
 
