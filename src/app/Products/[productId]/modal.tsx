@@ -1,5 +1,6 @@
 // src/components/ImageModal.tsx
 import { ArrowBack, ArrowForward, Close } from "@mui/icons-material";
+import Image from "next/image";
 import React from "react";
 
 interface ImageModalProps {
@@ -20,10 +21,12 @@ const ImageModal: React.FC<ImageModalProps> = ({
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <img
+        <Image
           src={imageUrls[currentIndex]}
           alt="Full Size"
           className="modal-image"
+          width={0}
+          height={0}
         />
         <button className="modal-close" onClick={onClose}>
           Close <Close />
