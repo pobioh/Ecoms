@@ -1,0 +1,30 @@
+.shop-pagination .pagination ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.shop-pagination .pagination ul li {
+  display: inline;
+  margin: 0 5px;
+}
+
+.shop-pagination .pagination ul li a {
+  display: inline-block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #000; /* Default text color */
+  background-color: #f0f0f0; /* Default background color */
+  border-radius: 5px;
+}
+
+.shop-pagination .pagination ul li a.active {
+  background-color: #007bff; /* Active page background color */
+  color: #fff; /* Active page text color */
+}
+
+.shop-pagination .pagination ul li a.disabled {
+  pointer-events: none;
+  color: #ccc; /* Disabled state text color */
+  background-color: #e9ecef; /* Disabled state background color */
+}

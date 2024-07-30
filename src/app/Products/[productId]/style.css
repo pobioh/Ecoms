@@ -1,0 +1,61 @@
+/* styles/globals.css or a CSS module file */
+
+.modal-overlay {
+  position: fixed; /* Fixes the modal to the viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.modal-content {
+  position: relative;
+  max-width: 80%; /* Limits the width of the modal content */
+  max-height: 80%; /* Limits the height of the modal content */
+  padding: 20px; /* Optional: adds padding around the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: adds shadow to modal */
+  z-index: 1001; /* Ensure it's above the overlay */
+}
+
+.modal-image {
+  max-width: 100%; /* Limits the width of the image to the container's width */
+  max-height: 70vh; /* Limits the height of the image to 70% of the viewport height */
+  display: block;
+  margin: 0 auto; /* Center the image */
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1002; /* Ensure it's above other modal content */
+}
+
+.modal-prev,
+.modal-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1002; /* Ensure it's above other modal content */
+}
+
+.modal-prev {
+  left: 10px;
+}
+
+.modal-next {
+  right: 10px;
+}
