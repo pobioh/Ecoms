@@ -6,6 +6,7 @@ import { ShoppingCart, Delete } from "@mui/icons-material";
 import { Alert } from "@mui/material";
 import { useCart } from "../CartContext"; // Ensure this path is correct
 import Link from "next/link";
+import Image from "next/image";
 
 export default function CartMenu() {
   const { cart, removeItem } = useCart();
@@ -61,10 +62,12 @@ export default function CartMenu() {
 
                   return (
                     <div key={index} className="flex items-center mb-2">
-                      <img
+                      <Image
                         src={item.imgSrc}
                         alt={item.title}
                         className="h-12 w-12 mr-2 rounded"
+                        width={500}
+                        height={300}
                       />
                       <div className="flex-1">
                         <h5 className="text-sm font-semibold">{item.title}</h5>

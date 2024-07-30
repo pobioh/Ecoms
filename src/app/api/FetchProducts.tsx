@@ -7,6 +7,7 @@ import Link from "next/link";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import AddToCartBtn from "../components/CartIcon";
+import Image from "next/image";
 
 const ProductPage = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -118,7 +119,7 @@ const ProductPage = () => {
                           href="Products"
                           onClick={() => handleProductClick(product.id)}
                         >
-                          <img src={product.imgSrc} alt={product.name} />
+                          <Image src={product.imgSrc} alt={product.name} layout="responsive" width={500} height={300} />
                         </Link>
                       </div>
                       <div className="product-info clearfix text-center">
@@ -152,7 +153,7 @@ const ProductPage = () => {
                           </a>
                           <a className="pl-8" title="Quick View">
                             <AddToCartBtn
-                              imgSrc={`/${product.imgSrc}`}
+                              imgSrc={product.imgSrc}
                               title={product.name}
                               price={product.price.toString()} // Ensure price is a string
                               rating={product.rating}
@@ -177,7 +178,7 @@ const ProductPage = () => {
                         </span>
                         <span className="pro-price-2">${product.price}</span>
                         <a href="single-product.html">
-                          <img src={product.imgSrc} alt={product.name} />
+                          <Image src={product.imgSrc} alt={product.name} layout="responsive" width={500} height={300} />
                         </a>
                       </div>
                     </div>

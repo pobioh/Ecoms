@@ -10,6 +10,7 @@ import { FavoriteBorder, Search, ZoomIn } from "@mui/icons-material";
 import Link from "next/link";
 import HandleBack from "@/app/components/BackButton";
 import AddToCartBtn from "@/app/components/CartIcon";
+import Image from "next/image";
 
 export default function ProductDetailPage() {
   const { productId } = useParams(); // Get the product ID from the URL
@@ -106,7 +107,13 @@ export default function ProductDetailPage() {
               <div className="single-product clearfix">
                 <div className="single-pro-slider single-big-photo view-lightbox slider-for">
                   <div>
-                    <img src={`/${product.imgSrc}`} alt={product.imgSrc} />
+                    <Image
+                      src={product.imgSrc}
+                      alt={product.name}
+                      layout="responsive"
+                      width={500}
+                      height={300}
+                    />
                     <a
                       className="view-full-screen"
                       href="#"
@@ -131,7 +138,7 @@ export default function ProductDetailPage() {
                     </span>
                   </div>
                   <div className="fix mb-20">
-                    <span className="pro-price">{product.price}</span>
+                    <span className="pro-price">${product.price}</span>
                   </div>
                   <div className="product-description">
                     <p>{product.description} </p>
@@ -230,7 +237,7 @@ export default function ProductDetailPage() {
                       </a>
 
                       <AddToCartBtn
-                        imgSrc={`/${product.imgSrc}`}
+                        imgSrc={product.imgSrc}
                         title={product.name}
                         price={product.price.toString()} // Ensure price is a string
                         rating={product.rating}
@@ -245,11 +252,14 @@ export default function ProductDetailPage() {
                             className="swiper-slide col-lg-3 m-2"
                             key={index}
                           >
-                            <img
+                            <Image
                               src={src}
                               alt={`Thumbnail ${index + 1}`}
                               className="thumbnail"
                               onClick={() => handleImageClick(src)}
+                              layout="responsive"
+                              width={500}
+                              height={300}
                             />
                           </div>
                         ))}
@@ -321,7 +331,13 @@ export default function ProductDetailPage() {
                         <ul className="product-comments clearfix">
                           <li className="mb-30">
                             <div className="pro-reviewer">
-                              <img src="img/reviewer/1.jpg" alt="" />
+                              <Image
+                                src="/img/reviewer/1.jpg"
+                                alt=""
+                                layout="responsive"
+                                width={500}
+                                height={300}
+                              />
                             </div>
                             <div className="pro-reviewer-comment">
                               <div className="fix">
@@ -353,7 +369,13 @@ export default function ProductDetailPage() {
                           </li>
                           <li className="threaded-comments">
                             <div className="pro-reviewer">
-                              <img src="img/reviewer/1.jpg" alt="" />
+                              <Image
+                                src="/img/reviewer/1.jpg"
+                                alt=""
+                                layout="responsive"
+                                width={500}
+                                height={300}
+                              />
                             </div>
                             <div className="pro-reviewer-comment">
                               <div className="fix">

@@ -4,6 +4,7 @@ import HeaderPage from "../components/header/header";
 import { Delete } from "@mui/icons-material";
 import { useCart } from "./CartContext";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function CartPreview() {
   const { cart, removeItem, updateQuantity } = useCart();
@@ -140,9 +141,12 @@ export default function CartPreview() {
                                           <div className="single-product">
                                             <div className="product-img">
                                               <Link href="#">
-                                                <img
+                                                <Image
                                                   src={item.imgSrc}
                                                   alt={item.title}
+                                                  layout="responsive"
+                                                  width={500}
+                                                  height={300}
                                                 />
                                               </Link>
                                             </div>

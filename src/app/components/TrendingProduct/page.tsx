@@ -37,7 +37,11 @@ const Product: React.FC<ProductProps> = ({
 
   const handleAddToCart = () => {
     const numericPrice = parsePrice(price);
-    addToCart({ imgSrc, title, price: numericPrice, quantity: 1 });
+    addToCart({
+      imgSrc, title, price: numericPrice, quantity: 1,
+      color: undefined,
+      size: undefined
+    });
   };
 
   return (
