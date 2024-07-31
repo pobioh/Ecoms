@@ -65,6 +65,10 @@ export default function CartMenu() {
     setDragging(false);
   };
 
+  function parsePrice(arg0: string) {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <div
       style={{
@@ -113,6 +117,10 @@ export default function CartMenu() {
                 <div className="px-4 py-2">
                   {cart.map((item, index) => {
                     const numericPrice = parsePrice(item.price.toString());
+
+                    function handleRemoveItem(index: number): void {
+                      throw new Error("Function not implemented.");
+                    }
 
                     return (
                       <div key={index} className="flex items-center mb-2">
