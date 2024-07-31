@@ -7,6 +7,7 @@ import SectionMenu from "../components/Section";
 // import ProductsPage from "../components/TrendingPage";
 import AllProducts from "../components/Products";
 import { Typography } from "@mui/material";
+import TrendingPage from "../components/TrendingPage";
 
 export default function HomePage() {
   return (
@@ -16,7 +17,7 @@ export default function HomePage() {
       <br />
       <br />
       <SectionMenu />
-      {/* <ProductsPage /> */}
+      <TrendingPage />
       <Discount />
       <br />
       <br />
