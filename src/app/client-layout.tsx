@@ -24,11 +24,11 @@ export default function ClientLayout({
     loadScript("/js/vendor/jquery-3.6.0.min.js");
     loadScript("/js/bootstrap.bundle.min.js");
     loadScript("/js/vendor/jquery-migrate-3.3.2.min.js");
-    // loadScript("/js/jquery.meanmenu.js");
+    loadScript("/js/jquery.meanmenu.js");
 
-    // loadScript("/js/slick.min.js");
-    // loadScript("/js/jquery.treeview.js");
-    // loadScript("/js/lightbox.min.js");
+    loadScript("/js/slick.min.js");
+    loadScript("/js/jquery.treeview.js");
+    loadScript("/js/lightbox.min.js");
     loadScript("/js/jquery-ui.min.js");
     loadScript("/lib/js/jquery.nivo.slider.js");
     loadScript("/lib/home.js");
