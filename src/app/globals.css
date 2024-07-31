@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @font-face {
   font-family: "Inter";
   src: url("/fonts/Inter-Regular.woff2") format("woff2"),
@@ -23,20 +21,25 @@
 /* Add more font weights and styles as needed */
 
 * {
-  font-family: "Mochiy Pop One", sans-serif;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
-
 .cart-center {
-  position: fixed;
+  position: fixed; /* Use absolute instead of fixed for dragging */
   bottom: 30rem;
   right: 1.3rem;
-  cursor: pointer;
+  cursor: grab; /* Cursor indicates draggable element */
   padding: 1.5rem; /* Reduced padding */
   line-height: 1.5rem; /* Reduced line-height */
   font-size: 10.5rem; /* Reduced font-size */
   font-weight: 600;
   z-index: 9999; /* High z-index to appear above other content */
   animation: zoomInOut 3s infinite ease-in-out;
+}
+
+.cart-center:active {
+  cursor: grabbing; /* Cursor while dragging */
 }
 
 @keyframes zoomInOut {
