@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Apps, FavoriteBorder, SearchOff, ViewList } from "@mui/icons-material";
-import PriceRange from "../components/PriceRange";
-import Pagination from "../components/Pagination"; // Import the new Pagination component
+import PriceRange from "./PriceRange";
+import Pagination from "./Pagination"; // Import the new Pagination component
 import Link from "next/link";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
-import AddToCartBtn from "../components/CartIcon";
+import AddToCartBtn from "./CartIcon";
 import Image from "next/image";
 
 const ProductPage = () => {
@@ -119,7 +119,13 @@ const ProductPage = () => {
                           href="Products"
                           onClick={() => handleProductClick(product.id)}
                         >
-                          <Image src={product.imgSrc} alt={product.name} layout="responsive" width={500} height={300} />
+                          <Image
+                            src={product.imgSrc}
+                            alt={product.name}
+                            layout="responsive"
+                            width={500}
+                            height={300}
+                          />
                         </Link>
                       </div>
                       <div className="product-info clearfix text-center">
@@ -178,7 +184,13 @@ const ProductPage = () => {
                         </span>
                         <span className="pro-price-2">${product.price}</span>
                         <a href="single-product.html">
-                          <Image src={product.imgSrc} alt={product.name} layout="responsive" width={500} height={300} />
+                          <Image
+                            src={product.imgSrc}
+                            alt={product.name}
+                            layout="responsive"
+                            width={500}
+                            height={300}
+                          />
                         </a>
                       </div>
                     </div>

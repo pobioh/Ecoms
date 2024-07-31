@@ -11,8 +11,7 @@ import {
   Slider,
   Typography,
 } from "@mui/material";
-import ProductPage from "../api/fetchProducts";
-
+import ProductPage from "./fetchProducts";
 
 export default function AllProducts() {
   const [value, setValue] = useState([10, 5000]);
