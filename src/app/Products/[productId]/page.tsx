@@ -4,13 +4,13 @@ import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import HeaderPage from "@/app/components/header/header";
 import Footer from "@/app/components/footer/footer";
-import "./style.css";
 import ImageModal from "./modal";
 import { FavoriteBorder, Search, ZoomIn } from "@mui/icons-material";
 import Link from "next/link";
 import HandleBack from "@/app/components/BackButton";
 import AddToCartBtn from "@/app/components/CartIcon";
 import Image from "next/image";
+import "./style.css";
 
 export default function ProductDetailPage() {
   const { productId } = useParams(); // Get the product ID from the URL
@@ -39,8 +39,9 @@ export default function ProductDetailPage() {
     }
   }, [productId]);
 
-  if (!product) return;
+  if (!product) return null;
 
+  // assuming multi picture
   const productImages = [
     "/img/product/6.jpg",
     "/img/product/7.jpg",
@@ -134,7 +135,7 @@ export default function ProductDetailPage() {
                       <a href="#">⭐</a>
                       <a href="#">⭐</a>
                       <a href="#">⭐</a>
-                      <span>( 27 Rating )</span>
+                      <span>( {product.rating} )</span>
                     </span>
                   </div>
                   <div className="fix mb-20">
@@ -253,6 +254,7 @@ export default function ProductDetailPage() {
                             key={index}
                           >
                             <Image
+                              key={index}
                               src={src}
                               alt={`Thumbnail ${index + 1}`}
                               className="thumbnail"
