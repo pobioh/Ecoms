@@ -10,9 +10,15 @@ import Image from "next/image";
 export default function CartMenu() {
   const { cart, removeItem } = useCart();
 
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  });
   const [dragging, setDragging] = useState(false);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [offset, setOffset] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  });
   const positionRef = useRef(position);
   positionRef.current = position;
 
@@ -37,7 +43,7 @@ export default function CartMenu() {
     }
   }, [position]);
 
-  const handleMouseDown = (e) => {
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setDragging(true);
     setOffset({
       x: e.clientX - position.x,
@@ -45,7 +51,7 @@ export default function CartMenu() {
     });
   };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (dragging) {
       const newX = e.clientX - offset.x;
       const newY = e.clientY - offset.y;
