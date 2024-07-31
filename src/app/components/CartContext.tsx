@@ -1,10 +1,9 @@
 "use client";
-// CartContext.tsx
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 interface CartItem {
-  color: ReactNode;
-  size: ReactNode;
+  color?: string; // Optional, allowing undefined
+  size?: string;  // Optional, allowing undefined
   imgSrc: string;
   title: string;
   price: number;
@@ -21,15 +20,21 @@ interface CartContextProps {
 const CartContext = createContext<CartContextProps | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [cart, setCart] = useState<CartItem[]>(() => {
+  const [cart, setCart] = useState<CartItem[]>([]);
+
+  useEffect(() => {
     // Load cart from local storage if available
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+    const savedCart = typeof window !== 'undefined' ? localStorage.getItem("cart") : null;
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, []);
 
   useEffect(() => {
     // Save cart to local storage whenever it changes
-    localStorage.setItem("cart", JSON.stringify(cart));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
   }, [cart]);
 
   const addToCart = (item: CartItem) => {
