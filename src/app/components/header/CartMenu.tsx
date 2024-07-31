@@ -43,25 +43,29 @@ export default function CartMenu() {
     }
   }, [position]);
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleStartDragging = (e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.TouchEvent<HTMLDivElement>) => {
     setDragging(true);
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
     setOffset({
-      x: e.clientX - position.x,
-      y: e.clientY - position.y,
+      x: clientX - position.x,
+      y: clientY - position.y,
     });
   };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleDragging = (e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.TouchEvent<HTMLDivElement>) => {
     if (dragging) {
-      const newX = e.clientX - offset.x;
-      const newY = e.clientY - offset.y;
+      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+      const newX = clientX - offset.x;
+      const newY = clientY - offset.y;
       requestAnimationFrame(() => {
         setPosition({ x: newX, y: newY });
       });
     }
   };
 
-  const handleMouseUp = () => {
+  const handleStopDragging = () => {
     setDragging(false);
   };
 
@@ -82,10 +86,13 @@ export default function CartMenu() {
         top: position.y,
         cursor: dragging ? "grabbing" : "grab",
       }}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
+      onMouseDown={handleStartDragging}
+      onMouseMove={handleDragging}
+      onMouseUp={handleStopDragging}
+      onMouseLeave={handleStopDragging}
+      onTouchStart={handleStartDragging}
+      onTouchMove={handleDragging}
+      onTouchEnd={handleStopDragging}
     >
       <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <Menu as="div" className="relative">
