@@ -1,6 +1,6 @@
 "use client";
 // CartContext.tsx
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 interface CartItem {
   color: ReactNode;
@@ -15,14 +15,12 @@ interface CartContextProps {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
   removeItem: (index: number) => void;
-  updateQuantity: (index: number, quantity: number) => void; // Add updateQuantity function
+  updateQuantity: (index: number, quantity: number) => void;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
 
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>(() => {
     // Load cart from local storage if available
     const savedCart = localStorage.getItem("cart");
@@ -49,9 +47,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <CartContext.Provider
-      value={{ cart, addToCart, removeItem, updateQuantity }}
-    >
+    <CartContext.Provider value={{ cart, addToCart, removeItem, updateQuantity }}>
       {children}
     </CartContext.Provider>
   );

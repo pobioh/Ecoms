@@ -4,7 +4,7 @@ import Footer from "../components/footer/footer";
 import Discount from "../components/Discount";
 import Subscription from "../components/Subscribe";
 import SectionMenu from "../components/Section";
-import ProductsPage from "../components/TrendingPage";
+// import ProductsPage from "../components/TrendingPage";
 import AllProducts from "../components/Products";
 import { Typography } from "@mui/material";
 
@@ -16,7 +16,7 @@ export default function HomePage() {
       <br />
       <br />
       <SectionMenu />
-      <ProductsPage />
+      {/* <ProductsPage /> */}
       <Discount />
       <br />
       <br />
