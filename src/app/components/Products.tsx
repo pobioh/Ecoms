@@ -11,7 +11,8 @@ import {
   Slider,
   Typography,
 } from "@mui/material";
-import ProductGrid from "../api/fetchProducts";
+import ProductPage from "../api/fetchProducts";
+
 
 export default function AllProducts() {
   const [value, setValue] = useState([10, 5000]);
@@ -78,7 +79,7 @@ export default function AllProducts() {
             </div>
             <div className="col-lg-9 order-1 order-lg-2 -300">
               <div className="shop-content mt-tab-30 mb-30 mb-lg-0">
-                <ProductGrid />
+                <ProductPage />
               </div>
             </div>
           </div>
