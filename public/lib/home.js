@@ -1,6 +1,8 @@
 (function ($) {
   "use strict";
 
+  console.log("Nivo Slider plugin loaded");
+
   //---------------------------------------------
   //Nivo slider
   //---------------------------------------------

@@ -21,24 +21,27 @@ const AddToCartBtn: React.FC<ProductProps> = ({
   // Function to convert price string to number
   const parsePrice = (priceString: string | number) => {
     // Ensure the priceString is a string
-    const priceStr = typeof priceString === 'number' ? priceString.toString() : priceString;
-    
+    const priceStr =
+      typeof priceString === "number" ? priceString.toString() : priceString;
+
     // Remove dollar sign and convert to float
     return parseFloat(priceStr.replace(/[^0-9.-]+/g, ""));
   };
-  
+
   const handleAddToCart = () => {
     const numericPrice = parsePrice(price);
     addToCart({
-      imgSrc, title, price: numericPrice, quantity: 1,
+      imgSrc,
+      title,
+      price: numericPrice,
+      quantity: 1,
       color: undefined,
-      size: undefined
+      size: undefined,
     });
   };
   return (
     <>
       <a
-        href="#"
         onClick={handleAddToCart}
         data-bs-toggle="tooltip"
         data-placement="top"
