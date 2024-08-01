@@ -183,7 +183,7 @@ const ProductPage = () => {
                           {product.label}
                         </span>
                         <span className="pro-price-2">${product.price}</span>
-                        <a href="single-product.html">
+                        <Link href={`Products${product.id}`}>
                           <Image
                             src={product.imgSrc}
                             alt={product.name}
@@ -191,7 +191,7 @@ const ProductPage = () => {
                             width={500}
                             height={300}
                           />
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <div className="col-lg-8 col-md-6">
