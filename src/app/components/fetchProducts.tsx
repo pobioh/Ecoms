@@ -183,7 +183,7 @@ const ProductPage = () => {
                           {product.label}
                         </span>
                         <span className="pro-price-2">${product.price}</span>
-                        <Link href={`Products${product.id}`}>
+                        <Link href={`Products/${product.id}`}>
                           <Image
                             src={product.imgSrc}
                             alt={product.name}
