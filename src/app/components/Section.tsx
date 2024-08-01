@@ -1,5 +1,6 @@
 import { FavoriteBorder, Lock, Search, ShoppingBag } from "@mui/icons-material";
 import CustomSlider from "./SlideMenu";
+import Image from "next/image";
 
 export default function SectionMenu() {
   return (
@@ -9,7 +10,7 @@ export default function SectionMenu() {
           <div className="slider-banner">
             <div className="single-banner banner-1">
               <a className="banner-thumb" href="#">
-                <img src="img/banner/1.jpg" alt="" />
+                <Image src="/img/banner/1.jpg" alt="" />
               </a>
               <span className="pro-label new-label">new</span>
               <span className="price">$50.00</span>
@@ -25,7 +26,7 @@ export default function SectionMenu() {
             </div>
             <div className="single-banner banner-2">
               <a className="banner-thumb" href="#">
-                <img src="img/banner/2.jpg" alt="" />
+                <Image src="/img/banner/2.jpg" alt="" />
               </a>
               <div className="banner-brief">
                 <h2 className="banner-title">

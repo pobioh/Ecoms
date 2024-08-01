@@ -50,7 +50,6 @@ export default function CartPreview() {
   const orderTotal = cartSubtotal + vatAmount + shippingFee;
   return (
     <>
-      <HeaderPage />
       <div className="bg-dark-white">
         <div className="heading-banner-area overlay-bg">
           <div className="container">

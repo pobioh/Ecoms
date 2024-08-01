@@ -40,7 +40,7 @@ const TrendingProduct: React.FC<ProductProps> = ({
 
           <Image src={imgSrc} alt={title} width={300} height={300} />
 
-          <div className="product-action clearfix">
+          <div className="product-action">
             <a
               href="wishlist.html"
               data-bs-toggle="tooltip"
@@ -57,8 +57,12 @@ const TrendingProduct: React.FC<ProductProps> = ({
             >
               <Visibility />
             </a>
-              <AddToCartBtn imgSrc={imgSrc} title={title} price={price} rating={rating} />
-            
+            <AddToCartBtn
+              imgSrc={imgSrc}
+              title={title}
+              price={price}
+              rating={rating}
+            />
           </div>
         </div>
         <div className="product-info clearfix">

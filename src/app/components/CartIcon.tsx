@@ -1,4 +1,4 @@
-import { ShoppingCart } from "@mui/icons-material";
+import { ShoppingBasketRounded, ShoppingCart } from "@mui/icons-material";
 import { useCart } from "../../app/components/CartContext"; // Adjust the path accordingly
 
 interface ProductProps {
@@ -43,7 +43,7 @@ const AddToCartBtn: React.FC<ProductProps> = ({
       data-placement="top"
       title="Add To Cart"
     >
-      <ShoppingCart />
+      Add to cart <ShoppingCart />
     </a>
   );
 };

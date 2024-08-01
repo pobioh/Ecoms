@@ -1,5 +1,7 @@
 // components/Slideshow.js
 
+import Image from "next/image";
+
 const CustomSlider = () => {
   return (
     <>
@@ -7,18 +9,18 @@ const CustomSlider = () => {
         <div className="slider-area">
           <div className="bend niceties preview-2">
             <div id="ensign-nivoslider" className="slides">
-              <img
-                src="img/slider/slider-1/1.jpg"
+              <Image width={300} height={200}
+                src="/img/slider/slider-1/1.jpg"
                 alt=""
                 title="#slider-direction-1"
               />
-              <img
-                src="img/slider/slider-1/2.jpg"
+              <Image width={300} height={200}
+                src="/img/slider/slider-1/2.jpg"
                 alt=""
                 title="#slider-direction-2"
               />
-              <img
-                src="img/slider/slider-1/3.jpg"
+              <Image width={300} height={200}
+                src="/img/slider/slider-1/3.jpg"
                 alt=""
                 title="#slider-direction-3"
               />
