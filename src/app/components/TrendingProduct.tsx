@@ -11,8 +11,10 @@ import {
   Visibility,
 } from "@mui/icons-material";
 import { useCart } from "./CartContext"; // Adjust the path accordingly
+import AddToCartBtn from "./CartIcon";
 
 interface ProductProps {
+  id: string;
   imgSrc: string;
   title: string;
   price: string;
@@ -21,6 +23,7 @@ interface ProductProps {
 }
 
 const TrendingProduct: React.FC<ProductProps> = ({
+  id,
   imgSrc,
   title,
   price,
@@ -28,17 +31,6 @@ const TrendingProduct: React.FC<ProductProps> = ({
   label,
 }) => {
   const { addToCart } = useCart();
-
-  // Function to convert price string to number
-  const parsePrice = (priceString: string) => {
-    // Remove dollar sign and convert to float
-    return parseFloat(priceString.replace(/[^0-9.-]+/g, ""));
-  };
-
-  const handleAddToCart = () => {
-    const numericPrice = parsePrice(price);
-    addToCart({ imgSrc, title, price: numericPrice, quantity: 1 });
-  };
 
   return (
     <div className="col-lg-3 col-md-4 col-sm-6">
@@ -58,7 +50,7 @@ const TrendingProduct: React.FC<ProductProps> = ({
               <FavoriteBorder />
             </a>
             <a
-              href="#"
+              href={`${id}`}
               data-bs-toggle="modal"
               data-bs-target="#productModal"
               title="Quick View"
@@ -66,13 +58,11 @@ const TrendingProduct: React.FC<ProductProps> = ({
               <Visibility />
             </a>
             <a
-              href="#"
-              onClick={handleAddToCart}
               data-bs-toggle="tooltip"
               data-placement="top"
               title="Add To Cart"
             >
-              <ShoppingCart />
+              <AddToCartBtn imgSrc={imgSrc} title={title} price={price} rating={rating} />
             </a>
           </div>
         </div>

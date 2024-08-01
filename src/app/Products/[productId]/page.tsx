@@ -87,12 +87,12 @@ export default function ProductDetailPage() {
                 <div className="breadcumbs pb-15">
                   <ul>
                     <li>
-                      <Link href="./">Home</Link>
+                      <Link href="../">Home</Link>
                     </li>
+                    <li>{product.name}</li>
                     <li>
                       <HandleBack />
                     </li>
-                    <li>{product.name}</li>
                   </ul>
                 </div>
               </div>

@@ -1,3 +1,4 @@
+"use client";
 import { useRouter } from "next/navigation";
 
 export default function HandleBack() {
@@ -7,7 +8,7 @@ export default function HandleBack() {
   };
   return (
     <>
-      <span style={{ cursor: 'pointer' }} onClick={handleBack}>
+      <span style={{ cursor: "pointer" }} onClick={handleBack}>
         Back
       </span>
     </>

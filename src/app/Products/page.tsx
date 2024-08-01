@@ -2,6 +2,7 @@ import Link from "next/link";
 import AllProducts from "../components/Products";
 import Footer from "../components/footer/footer";
 import HeaderPage from "../components/header/header";
+import HandleBack from "../components/BackButton";
 
 export default function ProductsPage() {
   return (
@@ -20,7 +21,10 @@ export default function ProductsPage() {
                     <li>
                       <Link href="../">Home</Link>
                     </li>
-                    <li>Product grid view</li>
+                    <li>Products</li>
+                    <li>
+                      <HandleBack />
+                    </li>
                   </ul>
                 </div>
               </div>

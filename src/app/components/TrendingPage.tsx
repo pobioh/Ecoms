@@ -2,9 +2,9 @@
 
 import TrendingProduct from "./TrendingProduct";
 
-
 const products = [
   {
+    id: "1",
     imgSrc: "/img/product/1.jpg",
     title: "Chair",
     price: "$50.20",
@@ -12,6 +12,7 @@ const products = [
     label: "new" as "new", // Cast to the specific type
   },
   {
+    id: "2",
     imgSrc: "/img/product/2.jpg",
     title: "dummy Product name",
     price: "$56.20",
@@ -19,12 +20,14 @@ const products = [
     label: "sale" as "sale", // Cast to the specific type
   },
   {
+    id: "3",
     imgSrc: "/img/product/3.jpg",
     title: "Second Product",
     price: "$100.20",
     rating: 4.5,
   },
   {
+    id: "4",
     imgSrc: "/img/product/4.jpg",
     title: "3rd Prody",
     price: "$200.20",
@@ -39,7 +42,7 @@ const TrendingPage: React.FC = () => {
         <div className="row">
           <div className="col-lg-12">
             <div className="section-title text-center">
-              <h2 className="title-border">Trendings Products</h2>
+              <h2 className="title-border">Trending Products</h2>
             </div>
             <div className="product-slider style-1 arrow-left-right">
               <div className="row">
@@ -51,6 +54,7 @@ const TrendingPage: React.FC = () => {
                     price={product.price}
                     rating={product.rating}
                     label={product.label}
+                    id={product.id}
                   />
                 ))}
               </div>
