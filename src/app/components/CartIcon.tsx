@@ -1,27 +1,31 @@
-import { ShoppingBasketRounded, ShoppingCart } from "@mui/icons-material";
-import { useCart } from "../../app/components/CartContext"; // Adjust the path accordingly
+"use client";
+import React, { useState } from 'react';
+import { ShoppingBasketRounded, ShoppingCart } from '@mui/icons-material';
+import { useCart } from './CartContext'; // Adjust the path accordingly
 
 interface ProductProps {
   imgSrc: string;
   title: string;
   price: string;
   rating: number;
-  label?: "new" | "sale";
+  quantity: number;
+  label?: 'new' | 'sale';
 }
 
 const AddToCartBtn: React.FC<ProductProps> = ({
   imgSrc,
   title,
   price,
+  quantity,
   rating,
   label,
 }) => {
   const { addToCart } = useCart();
+  const [isAdded, setIsAdded] = useState(false);
 
   const parsePrice = (priceString: string | number) => {
-    const priceStr =
-      typeof priceString === "number" ? priceString.toString() : priceString;
-    return parseFloat(priceStr.replace(/[^0-9.-]+/g, ""));
+    const priceStr = typeof priceString === 'number' ? priceString.toString() : priceString;
+    return parseFloat(priceStr.replace(/[^0-9.-]+/g, ''));
   };
 
   const handleAddToCart = () => {
@@ -34,6 +38,7 @@ const AddToCartBtn: React.FC<ProductProps> = ({
       color: undefined,
       size: undefined,
     });
+    setIsAdded(true);
   };
 
   return (
@@ -43,7 +48,7 @@ const AddToCartBtn: React.FC<ProductProps> = ({
       data-placement="top"
       title="Add To Cart"
     >
-      <ShoppingCart />
+      {isAdded ? <ShoppingBasketRounded /> : <ShoppingCart />}
     </a>
   );
 };

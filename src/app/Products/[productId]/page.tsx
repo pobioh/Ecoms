@@ -239,6 +239,7 @@ export default function ProductDetailPage() {
 
                       <AddToCartBtn
                         imgSrc={product.imgSrc}
+                        quantity={product.quantity}
                         title={product.name}
                         price={product.price.toString()} // Ensure price is a string
                         rating={product.rating}

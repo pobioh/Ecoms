@@ -13,7 +13,6 @@ export default function AboutUs() {
           backgroundSize: "cover", // optional: to ensure the image covers the entire div
           backgroundPosition: "center", // optional: to center the image
           backgroundRepeat: "no-repeat", // optional: to avoid repeating the image
-          
         }}
       >
         <div className="container">
@@ -46,7 +45,12 @@ export default function AboutUs() {
             <div className="row">
               <div className="col-lg-6">
                 <div className="about-photo">
-                  <Image src="/img/bg/about.png" alt="" width={300} height={200}/>
+                  <Image
+                    src="/img/bg/about.png"
+                    alt=""
+                    width={300}
+                    height={200}
+                  />
                 </div>
               </div>
               <div className="col-lg-6">
@@ -96,7 +100,12 @@ export default function AboutUs() {
             <div className="row">
               <div className="col-lg-3 col-md-6">
                 <div className="single-member text-center bg-white mt-25">
-                  <Image width={300} height={200} src="/img/team/1.png" alt="" />
+                  <Image
+                    width={300}
+                    height={200}
+                    src="/img/team/1.png"
+                    alt=""
+                  />
                   <h3 className="text-uppercase mt-20">Nancy holland</h3>
                   <h4 className="text-uppercase text-gray">Chairman</h4>
                   <p className="text-gray">
@@ -136,7 +145,12 @@ export default function AboutUs() {
               </div>
               <div className="col-lg-3 col-md-6">
                 <div className="single-member text-center bg-white mt-25">
-                  <Image src="img/team/2.png" width={300} height={200} alt="" />
+                  <Image
+                    src="/img/team/2.png"
+                    width={300}
+                    height={200}
+                    alt=""
+                  />
                   <h3 className="text-uppercase mt-20">Heather Estrada</h3>
                   <h4 className="text-uppercase text-gray">Chief Marketing</h4>
                   <p className="text-gray">
@@ -176,7 +190,12 @@ export default function AboutUs() {
               </div>
               <div className="col-lg-3 col-md-6">
                 <div className="single-member text-center bg-white mt-25">
-                  <Image width={300} height={200} src="img/team/3.png" alt="" />
+                  <Image
+                    width={300}
+                    height={200}
+                    src="/img/team/3.png"
+                    alt=""
+                  />
                   <h3 className="text-uppercase mt-20">Nancy holland</h3>
                   <h4 className="text-uppercase text-gray">fashion desinger</h4>
                   <p className="text-gray">
@@ -216,7 +235,12 @@ export default function AboutUs() {
               </div>
               <div className="col-lg-3 col-md-6">
                 <div className="single-member text-center bg-white mt-25">
-                  <Image width={300} height={200} src="img/team/1.png" alt="" />
+                  <Image
+                    width={300}
+                    height={200}
+                    src="/img/team/1.png"
+                    alt=""
+                  />
                   <h3 className="text-uppercase mt-20">Sara Knight</h3>
                   <h4 className="text-uppercase text-gray">Graphic Design</h4>
                   <p className="text-gray">

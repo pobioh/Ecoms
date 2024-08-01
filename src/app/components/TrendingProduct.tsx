@@ -19,6 +19,7 @@ interface ProductProps {
   title: string;
   price: string;
   rating: number;
+  quantity: number;
   label?: "new" | "sale";
 }
 
@@ -27,6 +28,7 @@ const TrendingProduct: React.FC<ProductProps> = ({
   imgSrc,
   title,
   price,
+  quantity,
   rating,
   label,
 }) => {
@@ -50,7 +52,7 @@ const TrendingProduct: React.FC<ProductProps> = ({
               <FavoriteBorder />
             </a>
             <a
-              href={`${id}`}
+              href={`Products/${id}`}
               data-bs-toggle="modal"
               data-bs-target="#productModal"
               title="Quick View"
@@ -62,6 +64,7 @@ const TrendingProduct: React.FC<ProductProps> = ({
               title={title}
               price={price}
               rating={rating}
+              quantity={quantity}
             />
           </div>
         </div>
