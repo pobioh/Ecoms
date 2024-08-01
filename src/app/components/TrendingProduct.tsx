@@ -57,13 +57,8 @@ const TrendingProduct: React.FC<ProductProps> = ({
             >
               <Visibility />
             </a>
-            <a
-              data-bs-toggle="tooltip"
-              data-placement="top"
-              title="Add To Cart"
-            >
               <AddToCartBtn imgSrc={imgSrc} title={title} price={price} rating={rating} />
-            </a>
+            
           </div>
         </div>
         <div className="product-info clearfix">

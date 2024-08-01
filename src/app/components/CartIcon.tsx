@@ -18,13 +18,9 @@ const AddToCartBtn: React.FC<ProductProps> = ({
 }) => {
   const { addToCart } = useCart();
 
-  // Function to convert price string to number
   const parsePrice = (priceString: string | number) => {
-    // Ensure the priceString is a string
     const priceStr =
       typeof priceString === "number" ? priceString.toString() : priceString;
-
-    // Remove dollar sign and convert to float
     return parseFloat(priceStr.replace(/[^0-9.-]+/g, ""));
   };
 
@@ -39,17 +35,16 @@ const AddToCartBtn: React.FC<ProductProps> = ({
       size: undefined,
     });
   };
+
   return (
-    <>
-      <a
-        onClick={handleAddToCart}
-        data-bs-toggle="tooltip"
-        data-placement="top"
-        title="Add To Cart"
-      >
-        <ShoppingCart />
-      </a>
-    </>
+    <a
+      onClick={handleAddToCart}
+      data-bs-toggle="tooltip"
+      data-placement="top"
+      title="Add To Cart"
+    >
+      <ShoppingCart />
+    </a>
   );
 };
 

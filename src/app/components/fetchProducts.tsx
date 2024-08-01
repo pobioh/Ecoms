@@ -157,14 +157,12 @@ const ProductPage = () => {
                           >
                             <SearchOff />
                           </a>
-                          <a className="pl-8" title="Quick View">
                             <AddToCartBtn
                               imgSrc={product.imgSrc}
                               title={product.name}
                               price={product.price.toString()} // Ensure price is a string
                               rating={product.rating}
                             />
-                          </a>
                         </div>
                       </div>
                     </div>

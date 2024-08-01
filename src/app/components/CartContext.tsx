@@ -2,8 +2,8 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 interface CartItem {
-  color?: string; // Optional, allowing undefined
-  size?: string;  // Optional, allowing undefined
+  color?: string;
+  size?: string;
   imgSrc: string;
   title: string;
   price: number;
@@ -26,7 +26,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Load cart from local storage if available
     const savedCart = typeof window !== 'undefined' ? localStorage.getItem("cart") : null;
     if (savedCart) {
-      setCart(JSON.parse(savedCart));
+      try {
+        setCart(JSON.parse(savedCart));
+      } catch (error) {
+        console.error("Failed to parse cart from localStorage:", error);
+      }
     }
   }, []);
 
