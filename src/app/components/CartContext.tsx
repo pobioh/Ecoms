@@ -1,11 +1,5 @@
 "use client";
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 interface CartItem {
   color?: string;
@@ -24,18 +18,20 @@ interface CartContextProps {
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>(() => {
-    // Load cart from local storage if available
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
+    if (typeof window !== "undefined") {
+      const savedCart = localStorage.getItem("cart");
+      return savedCart ? JSON.parse(savedCart) : [];
+    }
+    return [];
   });
 
   useEffect(() => {
-    // Save cart to local storage whenever it changes
-    localStorage.setItem("cart", JSON.stringify(cart));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
   }, [cart]);
 
   const addToCart = (item: CartItem) => {
@@ -53,9 +49,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <CartContext.Provider
-      value={{ cart, addToCart, removeItem, updateQuantity }}
-    >
+    <CartContext.Provider value={{ cart, addToCart, removeItem, updateQuantity }}>
       {children}
     </CartContext.Provider>
   );

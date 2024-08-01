@@ -10,7 +10,12 @@ export default function SectionMenu() {
           <div className="slider-banner">
             <div className="single-banner banner-1">
               <a className="banner-thumb" href="#">
-                <Image src="/img/banner/1.jpg" alt="" />
+                <Image
+                  src="/img/banner/1.jpg"
+                  alt=""
+                  width={300}
+                  height={200}
+                />
               </a>
               <span className="pro-label new-label">new</span>
               <span className="price">$50.00</span>
@@ -26,7 +31,9 @@ export default function SectionMenu() {
             </div>
             <div className="single-banner banner-2">
               <a className="banner-thumb" href="#">
-                <Image src="/img/banner/2.jpg" alt="" />
+                <Image src="/img/banner/2.jpg" alt="" 
+                  width={300}
+                  height={200}/>
               </a>
               <div className="banner-brief">
                 <h2 className="banner-title">
@@ -48,7 +55,7 @@ export default function SectionMenu() {
           </div>
         </div>
         {/* slideshow  */}
-       <CustomSlider />
+        <CustomSlider />
         <div className="sidebar-account d-none d-md-block">
           <div className="table">
             <div className="table-cell">

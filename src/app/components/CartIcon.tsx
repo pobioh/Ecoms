@@ -43,7 +43,7 @@ const AddToCartBtn: React.FC<ProductProps> = ({
       data-placement="top"
       title="Add To Cart"
     >
-      Add to cart <ShoppingCart />
+      <ShoppingCart />
     </a>
   );
 };
