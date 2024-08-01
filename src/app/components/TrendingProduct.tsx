@@ -64,7 +64,7 @@ const TrendingProduct: React.FC<ProductProps> = ({
               title={title}
               price={price}
               rating={rating}
-              quantity={quantity}
+              // quantity={quantity}
             />
           </div>
         </div>

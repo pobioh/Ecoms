@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 interface CartItem {
   color?: string;
@@ -19,7 +19,9 @@ interface CartContextProps {
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
 
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [cart, setCart] = useState<CartItem[]>(() => {
     if (typeof window !== "undefined") {
       const savedCart = localStorage.getItem("cart");
@@ -35,7 +37,27 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [cart]);
 
   const addToCart = (item: CartItem) => {
-    setCart((prevCart) => [...prevCart, item]);
+    setCart((prevCart) => {
+      const existingItemIndex = prevCart.findIndex(
+        (cartItem) =>
+          cartItem.title === item.title &&
+          cartItem.color === item.color &&
+          cartItem.size === item.size
+      );
+
+      if (existingItemIndex !== -1) {
+        // Item already exists in the cart, increase the quantity by 1
+        const updatedCart = [...prevCart];
+        updatedCart[existingItemIndex] = {
+          ...updatedCart[existingItemIndex],
+          quantity: updatedCart[existingItemIndex].quantity + 1,
+        };
+        return updatedCart;
+      } else {
+        // Item does not exist in the cart, add it with initial quantity 1
+        return [...prevCart, { ...item, quantity: 1 }];
+      }
+    });
   };
 
   const removeItem = (index: number) => {
@@ -49,7 +71,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeItem, updateQuantity }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeItem, updateQuantity }}
+    >
       {children}
     </CartContext.Provider>
   );

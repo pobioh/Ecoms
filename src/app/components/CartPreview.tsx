@@ -5,6 +5,7 @@ import { Delete } from "@mui/icons-material";
 import { useCart } from "./CartContext";
 import Link from "next/link";
 import Image from "next/image";
+import HandleBack from "./BackButton";
 
 export default function CartPreview() {
   const { cart, removeItem, updateQuantity } = useCart();
@@ -51,7 +52,17 @@ export default function CartPreview() {
   return (
     <>
       <div className="bg-dark-white">
-        <div className="heading-banner-area overlay-bg">
+        <div
+        className="overlay-bg"
+        style={{
+          backgroundImage:
+            "url('https://images.pexels.com/photos/25070769/pexels-photo-25070769/free-photo-of-smiling-balls-in-a-trolley.jpeg?auto=compress&cs=tinysrgb&w=600')",
+          backgroundSize: "cover", // optional: to ensure the image covers the entire div
+          backgroundPosition: "center", // optional: to center the image
+          backgroundRepeat: "no-repeat", // optional: to avoid repeating the image
+        }}
+      >
+        
           <div className="container">
             <div className="row">
               <div className="col-md-12">
@@ -62,9 +73,10 @@ export default function CartPreview() {
                   <div className="breadcumbs pb-15">
                     <ul>
                       <li>
-                        <Link href="index">Home</Link>
+                        <Link href="../">Home</Link>
                       </li>
                       <li>Shopping Cart</li>
+                      <li><HandleBack /></li>
                     </ul>
                   </div>
                 </div>

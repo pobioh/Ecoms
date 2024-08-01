@@ -1,15 +1,16 @@
 "use client"; // Ensure this is a client component
 
 import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import HeaderPage from "@/app/components/header/header";
 import Footer from "@/app/components/footer/footer";
-import ImageModal from "./modal";
 import { FavoriteBorder, Search, ZoomIn } from "@mui/icons-material";
 import Link from "next/link";
 import HandleBack from "@/app/components/BackButton";
 import AddToCartBtn from "@/app/components/CartIcon";
+import { useCart } from "@/app/components/CartContext";
 import Image from "next/image";
+import ImageModal from "./modal";
 import "./style.css";
 
 export default function ProductDetailPage() {
@@ -17,10 +18,9 @@ export default function ProductDetailPage() {
   const [product, setProduct] = useState<any>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const { cart, addToCart, updateQuantity } = useCart();
 
   useEffect(() => {
-    console.log("Product ID:", productId); // Debugging line
-
     if (productId) {
       const fetchProduct = async () => {
         try {
@@ -71,6 +71,24 @@ export default function ProductDetailPage() {
       setCurrentIndex(currentIndex + 1);
       setSelectedImage(productImages[currentIndex + 1]);
     }
+  };
+
+  const handleUpdateQuantity = (index: number, quantity: number) => {
+    if (updateQuantity) {
+      updateQuantity(index, quantity);
+    } else {
+      console.error("updateQuantity is not defined in useCart");
+    }
+  };
+
+  const incrementQuantity = (index: number) => {
+    const newQuantity = cart[index].quantity + 1;
+    handleUpdateQuantity(index, newQuantity);
+  };
+
+  const decrementQuantity = (index: number) => {
+    const newQuantity = cart[index].quantity > 1 ? cart[index].quantity - 1 : 1;
+    handleUpdateQuantity(index, newQuantity);
   };
 
   return (
@@ -209,19 +227,29 @@ export default function ProductDetailPage() {
 
                   <div className="clearfix">
                     <div className="cart-plus-minus">
-                      <div className="dec qtybutton">-</div>
+                      <div
+                        className="dec qtybutton"
+                        onClick={() => decrementQuantity(currentIndex)}
+                      >
+                        -
+                      </div>
                       <input
                         type="text"
-                        value="02"
+                        value={cart[currentIndex]?.quantity || 0}
                         name="qtybutton"
                         className="cart-plus-minus-box"
+                        readOnly
                       />
-                      <div className="inc qtybutton">+</div>
+                      <div
+                        className="inc qtybutton"
+                        onClick={() => incrementQuantity(currentIndex)}
+                      >
+                        +
+                      </div>
                     </div>
 
                     <div className="product-action clearfix">
                       <a
-                        href="#"
                         data-bs-toggle="tooltip"
                         data-placement="top"
                         title="Wishlist"
@@ -229,7 +257,6 @@ export default function ProductDetailPage() {
                         <FavoriteBorder />
                       </a>
                       <a
-                        href="#"
                         data-bs-toggle="modal"
                         data-bs-target="#productModal"
                         title="Quick View"
@@ -239,9 +266,9 @@ export default function ProductDetailPage() {
 
                       <AddToCartBtn
                         imgSrc={product.imgSrc}
-                        quantity={product.quantity}
                         title={product.name}
                         price={product.price.toString()} // Ensure price is a string
+                        // quantity={product.quantity || 1}
                         rating={product.rating}
                       />
                     </div>
