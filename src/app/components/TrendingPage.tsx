@@ -7,7 +7,7 @@ const products = [
     id: "1",
     imgSrc: "/img/product/1.jpg",
     title: "Chair",
-    price: "$50.20",
+    price: 50.2,
     rating: 4.5,
     quantity: 8,
     label: "new" as "new", // Cast to the specific type
@@ -16,7 +16,7 @@ const products = [
     id: "2",
     imgSrc: "/img/product/2.jpg",
     title: "dummy Product name",
-    price: "$56.20",
+    price: 56.2,
     rating: 4.5,
     quantity: 4,
     label: "sale" as "sale", // Cast to the specific type
@@ -25,7 +25,7 @@ const products = [
     id: "3",
     imgSrc: "/img/product/3.jpg",
     title: "Second Product",
-    price: "$100.20",
+    price: 100.2,
     rating: 4.5,
     quantity: 2,
   },
@@ -33,7 +33,7 @@ const products = [
     id: "4",
     imgSrc: "/img/product/4.jpg",
     title: "3rd Prody",
-    price: "$200.20",
+    price: 200.2,
     rating: 4.5,
     quantity: 6,
   },
@@ -58,7 +58,9 @@ const TrendingPage: React.FC = () => {
                     price={product.price}
                     rating={product.rating}
                     label={product.label}
-                    id={product.id} quantity={product.quantity}                  />
+                    id={product.id}
+                    quantity={product.quantity}
+                  />
                 ))}
               </div>
             </div>

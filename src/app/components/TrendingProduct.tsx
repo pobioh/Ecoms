@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -10,8 +10,9 @@ import {
   StarHalf,
   Visibility,
 } from "@mui/icons-material";
-import { useCart } from "./CartContext"; // Adjust the path accordingly
-import AddToCartBtn from "./CartIcon";
+import { useCart } from "./CartContext"; // Ensure this path is correct
+import AddToCartBtn from "./CartIcon"; // Ensure this path is correct and component is properly exported
+import WishlistIcon from "./WishlistIcon"; // Ensure this path is correct and component is properly exported
 
 interface ProductProps {
   id: string;
@@ -34,6 +35,16 @@ const TrendingProduct: React.FC<ProductProps> = ({
 }) => {
   const { addToCart } = useCart();
 
+  const [wishlist, setWishlist] = useState<number[]>([]); // State for managing wishlist
+
+  const handleWishlistToggle = (productId: number) => {
+    if (wishlist.includes(productId)) {
+      setWishlist(wishlist.filter((id: number) => id !== productId));
+    } else {
+      setWishlist([...wishlist, productId]);
+    }
+  };
+
   return (
     <div className="col-lg-3 col-md-4 col-sm-6">
       <div className="single-product">
@@ -43,14 +54,14 @@ const TrendingProduct: React.FC<ProductProps> = ({
           <Image src={imgSrc} alt={title} width={300} height={300} />
 
           <div className="product-action">
-            <a
-              href="wishlist.html"
-              data-bs-toggle="tooltip"
-              data-placement="top"
-              title="Wishlist"
-            >
-              <FavoriteBorder />
-            </a>
+            <WishlistIcon
+              productId={Number(id)}
+              title={title}
+              price={price.toString()} // Ensure price is a string
+              imgSrc={imgSrc}
+              isInWishlist={wishlist.includes(Number(id))}
+              onToggleWishlist={handleWishlistToggle}
+            />
             <a
               href={`Products/${id}`}
               data-bs-toggle="modal"
@@ -76,7 +87,7 @@ const TrendingProduct: React.FC<ProductProps> = ({
             <p className="floatright hidden-sm d-none d-md-block">Furniture</p>
           </div>
           <div className="fix">
-            <span className="pro-price floatleft">{price}</span>
+            <span className="pro-price floatleft">${price}</span>
             <span className="pro-rating floatright">
               {[...Array(5)].map((_, i) => {
                 if (i < rating) {
