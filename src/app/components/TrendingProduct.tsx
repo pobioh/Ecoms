@@ -18,7 +18,7 @@ interface ProductProps {
   id: string;
   imgSrc: string;
   title: string;
-  price: string;
+  price: number;
   rating: number;
   quantity: number;
   label?: "new" | "sale";
