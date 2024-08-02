@@ -103,8 +103,8 @@ export default function CartPreview() {
                 <div className="shopping-cart">
                   <ul className="cart-page-menu nav row clearfix mb-30">
                     <li>
-                      <Link
-                        href="#shopping-cart"
+                      <a
+                        style={{ cursor: "pointer" }}
                         data-bs-toggle="tab"
                         className={
                           activeTab === "shopping-cart" ? "active" : ""
@@ -112,31 +112,31 @@ export default function CartPreview() {
                         onClick={() => handleTabClick("shopping-cart")}
                       >
                         shopping cart
-                      </Link>
+                      </a>
                     </li>
                     <li>
-                      <Link
-                        href="#wishlist"
+                      <a
+                        style={{ cursor: "pointer" }}
                         data-bs-toggle="tab"
                         className={activeTab === "wishlist" ? "active" : ""}
                         onClick={() => handleTabClick("wishlist")}
                       >
                         wishlist
-                      </Link>
+                      </a>
                     </li>
                     <li>
-                      <Link
-                        href="#check-out"
+                      <a
+                        style={{ cursor: "pointer" }}
                         data-bs-toggle="tab"
                         className={activeTab === "check-out" ? "active" : ""}
                         onClick={() => handleTabClick("check-out")}
                       >
                         check out
-                      </Link>
+                      </a>
                     </li>
                     <li>
-                      <Link
-                        href="#order-complete"
+                      <a
+                        style={{ cursor: "pointer" }}
                         data-bs-toggle="tab"
                         className={
                           activeTab === "order-complete" ? "active" : ""
@@ -144,7 +144,7 @@ export default function CartPreview() {
                         onClick={() => handleTabClick("order-complete")}
                       >
                         order complete
-                      </Link>
+                      </a>
                     </li>
                   </ul>
 
