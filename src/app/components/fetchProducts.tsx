@@ -152,7 +152,10 @@ const ProductPage = () => {
                         </div>
                         <div className="product-action clearfix">
                           <WishlistIcon
-                            productId={product.id}
+                            productId={Number(product.id)}
+                            title={product.name}
+                            price={product.price.toString()} // Ensure price is a string
+                            imgSrc={product.imgSrc}
                             isInWishlist={wishlist.includes(product.id)}
                             onToggleWishlist={handleWishlistToggle}
                           />
@@ -214,7 +217,10 @@ const ProductPage = () => {
                         </div>
                         <div className="product-action clearfix">
                           <WishlistIcon
-                            productId={product.id}
+                            productId={Number(product.id)}
+                            title={product.name}
+                            price={product.price.toString()} // Ensure price is a string
+                            imgSrc={product.imgSrc}
                             isInWishlist={wishlist.includes(product.id)}
                             onToggleWishlist={handleWishlistToggle}
                           />

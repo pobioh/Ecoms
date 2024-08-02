@@ -1,19 +1,17 @@
 "use client";
+import React, { useState } from "react";
 import HeaderPage from "../components/header/header";
 import { Delete } from "@mui/icons-material";
 import { useCart } from "./CartContext";
 import Link from "next/link";
 import Image from "next/image";
 import HandleBack from "./BackButton";
-import { useState } from "react";
 import CouponHandler from "./CouponHandler";
+import Wishlist from "./Wishlist";
 
 export default function CartPreview() {
   const { cart, removeItem, updateQuantity } = useCart();
   const [discount, setDiscount] = useState(0);
-  const [couponCode, setCouponCode] = useState("");
-  const [couponMessage, setCouponMessage] = useState("");
-  const [isCouponValid, setIsCouponValid] = useState(false);
 
   const handleRemoveItem = (index: number) => {
     if (removeItem) {
@@ -54,6 +52,12 @@ export default function CartPreview() {
   const shippingFee = 15;
   const vatAmount = cartSubtotal * vatRate;
   const orderTotal = cartSubtotal + vatAmount + shippingFee - discount;
+
+  const [activeTab, setActiveTab] = useState("shopping-cart");
+
+  const handleTabClick = (tab: React.SetStateAction<string>) => {
+    setActiveTab(tab);
+  };
 
   return (
     <>
@@ -100,32 +104,57 @@ export default function CartPreview() {
                   <ul className="cart-page-menu nav row clearfix mb-30">
                     <li>
                       <Link
-                        className="active"
                         href="#shopping-cart"
                         data-bs-toggle="tab"
+                        className={
+                          activeTab === "shopping-cart" ? "active" : ""
+                        }
+                        onClick={() => handleTabClick("shopping-cart")}
                       >
                         shopping cart
                       </Link>
                     </li>
                     <li>
-                      <Link href="#wishlist" data-bs-toggle="tab">
+                      <Link
+                        href="#wishlist"
+                        data-bs-toggle="tab"
+                        className={activeTab === "wishlist" ? "active" : ""}
+                        onClick={() => handleTabClick("wishlist")}
+                      >
                         wishlist
                       </Link>
                     </li>
                     <li>
-                      <Link href="#check-out" data-bs-toggle="tab">
+                      <Link
+                        href="#check-out"
+                        data-bs-toggle="tab"
+                        className={activeTab === "check-out" ? "active" : ""}
+                        onClick={() => handleTabClick("check-out")}
+                      >
                         check out
                       </Link>
                     </li>
                     <li>
-                      <Link href="#order-complete" data-bs-toggle="tab">
+                      <Link
+                        href="#order-complete"
+                        data-bs-toggle="tab"
+                        className={
+                          activeTab === "order-complete" ? "active" : ""
+                        }
+                        onClick={() => handleTabClick("order-complete")}
+                      >
                         order complete
                       </Link>
                     </li>
                   </ul>
 
                   <div className="tab-content">
-                    <div className="tab-pane active" id="shopping-cart">
+                    <div
+                      className={`tab-pane ${
+                        activeTab === "shopping-cart" ? "active" : ""
+                      }`}
+                      id="shopping-cart"
+                    >
                       <form action="#">
                         <div className="shop-cart-table">
                           <div className="table-content table-responsive">
@@ -285,6 +314,30 @@ export default function CartPreview() {
                           </div>
                         </div>
                       </form>
+                    </div>
+                    <div
+                      className={`tab-pane ${
+                        activeTab === "wishlist" ? "active" : ""
+                      }`}
+                      id="wishlist"
+                    >
+                      <Wishlist />
+                    </div>
+                    <div
+                      className={`tab-pane ${
+                        activeTab === "check-out" ? "active" : ""
+                      }`}
+                      id="check-out"
+                    >
+                      {/* Add check-out content here */}
+                    </div>
+                    <div
+                      className={`tab-pane ${
+                        activeTab === "order-complete" ? "active" : ""
+                      }`}
+                      id="order-complete"
+                    >
+                      {/* Add order-complete content here */}
                     </div>
                   </div>
                 </div>

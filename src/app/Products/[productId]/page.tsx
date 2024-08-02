@@ -22,6 +22,12 @@ export default function ProductDetailPage() {
   const { cart, addToCart, updateQuantity } = useCart();
   const [isInWishlist, setIsInWishlist] = useState<boolean>(false);
 
+  const [activeTab, setActiveTab] = useState("");
+
+  const handleTabClick = (tab: React.SetStateAction<string>) => {
+    setActiveTab(tab);
+  };
+
   useEffect(() => {
     if (productId) {
       const fetchProduct = async () => {
@@ -42,10 +48,7 @@ export default function ProductDetailPage() {
   }, [productId]);
 
   const onToggleWishlist = (productId: number) => {
-    // Implement the logic to toggle the wishlist state
     setIsInWishlist(!isInWishlist);
-    // Optionally, you can save the wishlist state to local storage or call an API to update the wishlist
-    localStorage.setItem(`wishlist_${productId}`, JSON.stringify(!isInWishlist));
   };
 
   if (!product) return null;
@@ -260,6 +263,9 @@ export default function ProductDetailPage() {
                     <div className="product-action clearfix">
                       <WishlistIcon
                         productId={Number(productId)}
+                        title={product.name}
+                        price={product.price.toString()} // Ensure price is a string
+                        imgSrc={product.imgSrc}
                         isInWishlist={isInWishlist}
                         onToggleWishlist={onToggleWishlist}
                       />
@@ -325,25 +331,31 @@ export default function ProductDetailPage() {
                     <li>
                       <a
                         href="#description"
-                        className="active"
+                        className={activeTab === "description" ? "active" : ""}
+                        onClick={() => handleTabClick("description")}
                         data-bs-toggle="tab"
                       >
                         Description
                       </a>
                     </li>
                     <li>
-                      <a href="#reviews" data-bs-toggle="tab">
+                      <a
+                        href="#reviews"
+                        className={activeTab === "reviews" ? "active" : ""}
+                        onClick={() => handleTabClick("reviews")}
+                        data-bs-toggle="tab"
+                      >
                         Reviews
                       </a>
                     </li>
                     <li>
-                      <a href="#information" data-bs-toggle="tab">
+                      <a
+                        href="#information"
+                        className={activeTab === "information" ? "active" : ""}
+                        onClick={() => handleTabClick("information")}
+                        data-bs-toggle="tab"
+                      >
                         Information
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#tags" data-bs-toggle="tab">
-                        Tags
                       </a>
                     </li>
                   </ul>
@@ -351,7 +363,12 @@ export default function ProductDetailPage() {
               </div>
               <div className="col-md-9">
                 <div className="tab-content">
-                  <div className="tab-pane active" id="description">
+                  <div
+                    className={`tab-pane ${
+                      activeTab === "description" ? "active" : ""
+                    }`}
+                    id="description"
+                  >
                     <div className="pro-tab-info pro-description">
                       <h3 className="tab-title title-border mb-30">
                         {product.name}
@@ -359,7 +376,12 @@ export default function ProductDetailPage() {
                       <p>{product.description} </p>
                     </div>
                   </div>
-                  <div className="tab-pane" id="reviews">
+                  <div
+                    className={`tab-pane ${
+                      activeTab === "reviews" ? "active" : ""
+                    }`}
+                    id="reviews"
+                  >
                     <div className="pro-tab-info pro-reviews">
                       <div className="customer-review mb-60">
                         <h3 className="tab-title title-border mb-30">
@@ -414,6 +436,8 @@ export default function ProductDetailPage() {
                                 height={300}
                               />
                             </div>
+
+                            {/* comment  */}
                             <div className="pro-reviewer-comment">
                               <div className="fix">
                                 <div className="floatleft mbl-center">
@@ -548,46 +572,16 @@ export default function ProductDetailPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="tab-pane" id="information">
+                  <div
+                    className={`tab-pane ${
+                      activeTab === "information" ? "active" : ""
+                    }`}
+                    id="information"
+                  >
                     <div className="pro-tab-info pro-information">
                       <h3 className="tab-title title-border mb-30">
                         Product information
                       </h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer accumsan egestas elese ifend. Phasellus a felis
-                        at est bibendum feugiat ut eget eni Praesent et messages
-                        in con sectetur posuere dolor non.
-                      </p>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer accumsan egestas elese ifend. Phasellus a felis
-                        at est bibendum feugiat ut eget eni Praesent et messages
-                        in con sectetur posuere dolor non.
-                      </p>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer accumsan egestas elese ifend. Phasellus a felis
-                        at est bibendum feugiat ut eget eni Praesent et messages
-                        in con sectetur posuere dolor non.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="tab-pane" id="tags">
-                    <div className="pro-tab-info pro-information">
-                      <h3 className="tab-title title-border mb-30">tags</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer accumsan egestas elese ifend. Phasellus a felis
-                        at est bibendum feugiat ut eget eni Praesent et messages
-                        in con sectetur posuere dolor non.
-                      </p>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer accumsan egestas elese ifend. Phasellus a felis
-                        at est bibendum feugiat ut eget eni Praesent et messages
-                        in con sectetur posuere dolor non.
-                      </p>
                       <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Integer accumsan egestas elese ifend. Phasellus a felis

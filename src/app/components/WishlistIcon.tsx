@@ -3,12 +3,18 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 interface WishlistIconProps {
   productId: number;
+  title: string;
+  price: string;
+  imgSrc: string;
   isInWishlist: boolean;
   onToggleWishlist: (productId: number) => void;
 }
 
 const WishlistIcon: React.FC<WishlistIconProps> = ({
   productId,
+  title,
+  price,
+  imgSrc,
   isInWishlist,
   onToggleWishlist,
 }) => {
@@ -28,16 +34,20 @@ const WishlistIcon: React.FC<WishlistIconProps> = ({
     e.preventDefault();
     const newWishlistState = !wishlist;
     setWishlist(newWishlistState);
-    localStorage.setItem(
-      `wishlist_${productId}`,
-      JSON.stringify(newWishlistState)
-    );
+    if (newWishlistState) {
+      // Store product details in local storage
+      const productDetails = { productId, title, price, imgSrc };
+      localStorage.setItem(`wishlist_${productId}`, JSON.stringify(productDetails));
+    } else {
+      // Remove product from local storage
+      localStorage.removeItem(`wishlist_${productId}`);
+    }
     onToggleWishlist(productId);
   };
 
   return (
     <a
-      style={{ cursor: "pointer" }}
+      href="#"
       onClick={handleToggleWishlist}
       data-bs-toggle="tooltip"
       data-placement="top"
