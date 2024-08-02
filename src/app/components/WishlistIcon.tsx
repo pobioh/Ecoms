@@ -37,7 +37,10 @@ const WishlistIcon: React.FC<WishlistIconProps> = ({
     if (newWishlistState) {
       // Store product details in local storage
       const productDetails = { productId, title, price, imgSrc };
-      localStorage.setItem(`wishlist_${productId}`, JSON.stringify(productDetails));
+      localStorage.setItem(
+        `wishlist_${productId}`,
+        JSON.stringify(productDetails)
+      );
     } else {
       // Remove product from local storage
       localStorage.removeItem(`wishlist_${productId}`);
@@ -53,7 +56,7 @@ const WishlistIcon: React.FC<WishlistIconProps> = ({
       data-placement="top"
       title="Wishlist"
     >
-      {wishlist ? <Favorite /> : <FavoriteBorder />}
+      {wishlist ? <Favorite style={{ color: "gold" }} /> : <FavoriteBorder />}
     </a>
   );
 };

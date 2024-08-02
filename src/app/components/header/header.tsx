@@ -9,7 +9,11 @@ import {
   MenuItems,
   Transition,
 } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowDownIcon,
+  Bars3Icon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { LinearProgress } from "@mui/material";
 import CartMenu from "./CartMenu"; // Ensure this path is correct
 import { useCart } from "../CartContext"; // Ensure this path is correct
@@ -134,7 +138,7 @@ export default function HeaderPage() {
                   className="h-8 w-8 rounded-full"
                 />
 
-                  <CartMenu />
+                <CartMenu />
               </div>
             </div>
           </div>
