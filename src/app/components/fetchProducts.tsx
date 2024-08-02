@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Apps, FavoriteBorder, SearchOff, ViewList } from "@mui/icons-material";
+import { Apps, SearchOff, ViewList } from "@mui/icons-material";
 import PriceRange from "./PriceRange";
 import Pagination from "./Pagination"; // Import the new Pagination component
 import Link from "next/link";
@@ -8,12 +8,14 @@ import StarRateIcon from "@mui/icons-material/StarRate";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import AddToCartBtn from "./CartIcon";
 import Image from "next/image";
+import WishlistIcon from "./WishlistIcon"; // Import the WishlistIcon component
 
 const ProductPage = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [view, setView] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
   const [priceRange, setPriceRange] = useState<number[]>([10, 5000]);
+  const [wishlist, setWishlist] = useState<number[]>([]); // State for managing wishlist
   const router = useRouter(); // Use useRouter here
 
   useEffect(() => {
@@ -55,6 +57,14 @@ const ProductPage = () => {
 
   const handleProductClick = (productId: number) => {
     router.push(`/Products/${productId}`);
+  };
+
+  const handleWishlistToggle = (productId: number) => {
+    if (wishlist.includes(productId)) {
+      setWishlist(wishlist.filter((id) => id !== productId));
+    } else {
+      setWishlist([...wishlist, productId]);
+    }
   };
 
   const renderStars = (rating: number) => {
@@ -141,14 +151,11 @@ const ProductPage = () => {
                           </span>
                         </div>
                         <div className="product-action clearfix">
-                          <a
-                            href="#"
-                            data-bs-toggle="tooltip"
-                            data-placement="top"
-                            title="Wishlist"
-                          >
-                            <FavoriteBorder />
-                          </a>
+                          <WishlistIcon
+                            productId={product.id}
+                            isInWishlist={wishlist.includes(product.id)}
+                            onToggleWishlist={handleWishlistToggle}
+                          />
                           <a
                             href={`Products/${product.id}`}
                             data-bs-toggle="modal"
@@ -206,14 +213,11 @@ const ProductPage = () => {
                           </span>
                         </div>
                         <div className="product-action clearfix">
-                          <a
-                            href="#"
-                            data-bs-toggle="tooltip"
-                            data-placement="top"
-                            title="Wishlist"
-                          >
-                            <FavoriteBorder />
-                          </a>
+                          <WishlistIcon
+                            productId={product.id}
+                            isInWishlist={wishlist.includes(product.id)}
+                            onToggleWishlist={handleWishlistToggle}
+                          />
                           <a
                             href={`Products/${product.id}`}
                             data-bs-toggle="modal"

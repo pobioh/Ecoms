@@ -12,6 +12,7 @@ import { useCart } from "@/app/components/CartContext";
 import Image from "next/image";
 import ImageModal from "./modal";
 import "./style.css";
+import WishlistIcon from "@/app/components/WishlistIcon";
 
 export default function ProductDetailPage() {
   const { productId } = useParams(); // Get the product ID from the URL
@@ -19,6 +20,7 @@ export default function ProductDetailPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const { cart, addToCart, updateQuantity } = useCart();
+  const [isInWishlist, setIsInWishlist] = useState<boolean>(false);
 
   useEffect(() => {
     if (productId) {
@@ -38,6 +40,13 @@ export default function ProductDetailPage() {
       fetchProduct();
     }
   }, [productId]);
+
+  const onToggleWishlist = (productId: number) => {
+    // Implement the logic to toggle the wishlist state
+    setIsInWishlist(!isInWishlist);
+    // Optionally, you can save the wishlist state to local storage or call an API to update the wishlist
+    localStorage.setItem(`wishlist_${productId}`, JSON.stringify(!isInWishlist));
+  };
 
   if (!product) return null;
 
@@ -249,13 +258,11 @@ export default function ProductDetailPage() {
                     </div>
 
                     <div className="product-action clearfix">
-                      <a
-                        data-bs-toggle="tooltip"
-                        data-placement="top"
-                        title="Wishlist"
-                      >
-                        <FavoriteBorder />
-                      </a>
+                      <WishlistIcon
+                        productId={Number(productId)}
+                        isInWishlist={isInWishlist}
+                        onToggleWishlist={onToggleWishlist}
+                      />
                       <a
                         data-bs-toggle="modal"
                         data-bs-target="#productModal"
@@ -488,9 +495,6 @@ export default function ProductDetailPage() {
                           </span>
                           <span className="separator">|</span>
                           <span>
-                            <a href="#">
-                              <i className="zmdi zmdi-star-outline"></i>
-                            </a>
                             <a href="#">
                               <i className="zmdi zmdi-star-outline"></i>
                             </a>
