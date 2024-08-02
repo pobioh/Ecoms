@@ -1,14 +1,19 @@
 "use client";
 import HeaderPage from "../components/header/header";
-// import { useCart } from "./CartContext"; // Ensure this path is correct
 import { Delete } from "@mui/icons-material";
 import { useCart } from "./CartContext";
 import Link from "next/link";
 import Image from "next/image";
 import HandleBack from "./BackButton";
+import { useState } from "react";
+import CouponHandler from "./CouponHandler";
 
 export default function CartPreview() {
   const { cart, removeItem, updateQuantity } = useCart();
+  const [discount, setDiscount] = useState(0);
+  const [couponCode, setCouponCode] = useState('');
+  const [couponMessage, setCouponMessage] = useState('');
+  const [isCouponValid, setIsCouponValid] = useState(false);
 
   const handleRemoveItem = (index: number) => {
     if (removeItem) {
@@ -48,21 +53,35 @@ export default function CartPreview() {
   const vatRate = 0.0; // Adjust the VAT rate as needed
   const shippingFee = 15;
   const vatAmount = cartSubtotal * vatRate;
-  const orderTotal = cartSubtotal + vatAmount + shippingFee;
+  const orderTotal = cartSubtotal + vatAmount + shippingFee - discount;
+
+  const handleApplyCoupon = () => {
+    // Implement your coupon logic here
+    // For example:
+    if (couponCode === "DISCOUNT10") {
+      setDiscount(10);
+      setCouponMessage("Coupon applied successfully!");
+      setIsCouponValid(true);
+    } else {
+      setCouponMessage("Invalid coupon code.");
+      setIsCouponValid(false);
+    }
+  };
+
   return (
     <>
+      <HeaderPage />
       <div className="bg-dark-white">
         <div
-        className="overlay-bg"
-        style={{
-          backgroundImage:
-            "url('https://images.pexels.com/photos/25070769/pexels-photo-25070769/free-photo-of-smiling-balls-in-a-trolley.jpeg?auto=compress&cs=tinysrgb&w=600')",
-          backgroundSize: "cover", // optional: to ensure the image covers the entire div
-          backgroundPosition: "center", // optional: to center the image
-          backgroundRepeat: "no-repeat", // optional: to avoid repeating the image
-        }}
-      >
-        
+          className="overlay-bg"
+          style={{
+            backgroundImage:
+              "url('https://images.pexels.com/photos/25070769/pexels-photo-25070769/free-photo-of-smiling-balls-in-a-trolley.jpeg?auto=compress&cs=tinysrgb&w=600')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
           <div className="container">
             <div className="row">
               <div className="col-md-12">
@@ -85,7 +104,7 @@ export default function CartPreview() {
           </div>
         </div>
 
-        <div className="shopping-cart-area  pt-30 pb-10">
+        <div className="shopping-cart-area pt-30 pb-10">
           <div className="container">
             <div className="row">
               <div className="col-lg-12">
@@ -141,9 +160,7 @@ export default function CartPreview() {
                                   </tr>
                                 ) : (
                                   cart.map((item, index) => {
-                                    const numericPrice = parsePrice(
-                                      item.price.toString()
-                                    );
+                                    const numericPrice = parsePrice(item.price.toString());
                                     const total = numericPrice * item.quantity;
 
                                     return (
@@ -186,9 +203,7 @@ export default function CartPreview() {
                                           <div className="cart-plus-minus">
                                             <div
                                               className="dec qtybutton"
-                                              onClick={() =>
-                                                decrementQuantity(index)
-                                              }
+                                              onClick={() => decrementQuantity(index)}
                                             >
                                               -
                                             </div>
@@ -197,12 +212,11 @@ export default function CartPreview() {
                                               value={item.quantity}
                                               name="qtybutton"
                                               className="cart-plus-minus-box"
+                                              readOnly
                                             />
                                             <div
                                               className="inc qtybutton"
-                                              onClick={() =>
-                                                incrementQuantity(index)
-                                              }
+                                              onClick={() => incrementQuantity(index)}
                                             >
                                               +
                                             </div>
@@ -214,9 +228,7 @@ export default function CartPreview() {
                                         <td className="product-remove">
                                           <Link
                                             href="#"
-                                            onClick={() =>
-                                              handleRemoveItem(index)
-                                            }
+                                            onClick={() => handleRemoveItem(index)}
                                           >
                                             <Delete className="relative rounded-full bg-red-800 p-1 text-gray-100 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" />
                                           </Link>
@@ -231,25 +243,10 @@ export default function CartPreview() {
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                            <div className="customer-login mt-30">
-                              <h4 className="title-1 title-border text-uppercase">
-                                coupon discount
-                              </h4>
-                              <p className="text-gray">
-                                Enter your coupon code if you have one!
-                              </p>
-                              <input
-                                type="text"
-                                placeholder="Enter your code here."
-                              />
-                              <button
-                                type="submit"
-                                data-text="apply coupon"
-                                className="button-one submit-button mt-15"
-                              >
-                                apply coupon
-                              </button>
-                            </div>
+                            <CouponHandler
+                              cartSubtotal={cartSubtotal}
+                              setDiscount={setDiscount}
+                            />
                           </div>
                           <div className="col-md-6">
                             <div className="customer-login payment-details mt-30">
@@ -275,6 +272,12 @@ export default function CartPreview() {
                                     </td>
                                   </tr>
                                   <tr>
+                                    <td className="text-left">Discount</td>
+                                    <td className="text-end">
+                                      ${discount.toFixed(2)}
+                                    </td>
+                                  </tr>
+                                  <tr>
                                     <td className="text-left">Order Total</td>
                                     <td className="text-end">
                                       ${orderTotal.toFixed(2)}
@@ -282,6 +285,41 @@ export default function CartPreview() {
                                   </tr>
                                 </tbody>
                               </table>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <div className="customer-login mt-30">
+                              <h4 className="title-1 title-border text-uppercase">
+                                Coupon Discount
+                              </h4>
+                              <p className="text-gray">
+                                Enter your coupon code if you have one!
+                              </p>
+                              <input
+                                type="text"
+                                placeholder="Enter your code here."
+                                value={couponCode}
+                                onChange={(e) => setCouponCode(e.target.value)}
+                              />
+                              <button
+                                onClick={handleApplyCoupon}
+                                data-text="apply coupon"
+                                className="button-one submit-button mt-15"
+                              >
+                                Apply Coupon
+                              </button>
+                              {couponMessage && (
+                                <p
+                                  className="mt-10"
+                                  style={{
+                                    color: isCouponValid ? "green" : "red",
+                                  }}
+                                >
+                                  {couponMessage}
+                                </p>
+                              )}
                             </div>
                           </div>
                         </div>

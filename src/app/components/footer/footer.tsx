@@ -10,8 +10,8 @@ export default function Footer() {
 								<div className="single-footer">
 									<h3 className="footer-title  title-border">Contact Us</h3>
 									<ul className="footer-contact">
-										<li><span>Address :</span>28 Green Tower, Street Name,<br/>New York City, USA</li>
-										<li><span>Cell-Phone :</span>012345 - 123456789</li>
+										<li><span>Address :</span>Winnipeg, Manitoba<br/>Canada</li>
+										<li><span>Cell-Phone :</span>204-588-0599</li>
 										<li><span>Email :</span>your-email@gmail.com</li>
 									</ul>
 								</div>
@@ -22,7 +22,7 @@ export default function Footer() {
 									<ul className="footer-menu">
 										<li><a href="#"><i className="zmdi zmdi-dot-circle"></i>My Account</a></li>
 										<li><a href="#"><i className="zmdi zmdi-dot-circle"></i>My Wishlist</a></li>
-										<li><a href="#"><i className="zmdi zmdi-dot-circle"></i>My Cart</a></li>
+										<li><a href="/Cart"><i className="zmdi zmdi-dot-circle"></i>My Cart</a></li>
 										<li><a href="#"><i className="zmdi zmdi-dot-circle"></i>Sign In</a></li>
 										<li><a href="#"><i className="zmdi zmdi-dot-circle"></i>Check out</a></li>
 									</ul>
