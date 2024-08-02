@@ -73,7 +73,7 @@ const TrendingProduct: React.FC<ProductProps> = ({
             <AddToCartBtn
               imgSrc={imgSrc}
               title={title}
-              price={price}
+              price={price.toString()} // Convert price to string here
               rating={rating}
               // quantity={quantity}
             />
