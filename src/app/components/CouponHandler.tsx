@@ -6,7 +6,10 @@ interface CouponHandlerProps {
   setDiscount: (discount: number) => void;
 }
 
-export default function CouponHandler({ cartSubtotal, setDiscount }: CouponHandlerProps) {
+export default function CouponHandler({
+  cartSubtotal,
+  setDiscount,
+}: CouponHandlerProps) {
   const [couponCode, setCouponCode] = useState("");
   const [couponMessage, setCouponMessage] = useState("");
   const [isCouponValid, setIsCouponValid] = useState<boolean | null>(null);
@@ -24,7 +27,7 @@ export default function CouponHandler({ cartSubtotal, setDiscount }: CouponHandl
     }
   }, [setDiscount]);
 
-  const handleApplyCoupon = (e: { preventDefault: () => void; }) => {
+  const handleApplyCoupon = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (couponCode === "DISCOUNT") {
       const discountAmount = cartSubtotal * 0.5;
@@ -62,7 +65,7 @@ export default function CouponHandler({ cartSubtotal, setDiscount }: CouponHandl
         apply coupon
       </button>
       {couponMessage && (
-        <p className="mt-10" style={{ color: isCouponValid ? "green" : "red" }}>
+        <p className="mt-4" style={{ color: isCouponValid ? "green" : "red" }}>
           {couponMessage}
         </p>
       )}

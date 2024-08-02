@@ -11,8 +11,8 @@ import CouponHandler from "./CouponHandler";
 export default function CartPreview() {
   const { cart, removeItem, updateQuantity } = useCart();
   const [discount, setDiscount] = useState(0);
-  const [couponCode, setCouponCode] = useState('');
-  const [couponMessage, setCouponMessage] = useState('');
+  const [couponCode, setCouponCode] = useState("");
+  const [couponMessage, setCouponMessage] = useState("");
   const [isCouponValid, setIsCouponValid] = useState(false);
 
   const handleRemoveItem = (index: number) => {
@@ -55,22 +55,8 @@ export default function CartPreview() {
   const vatAmount = cartSubtotal * vatRate;
   const orderTotal = cartSubtotal + vatAmount + shippingFee - discount;
 
-  const handleApplyCoupon = () => {
-    // Implement your coupon logic here
-    // For example:
-    if (couponCode === "DISCOUNT10") {
-      setDiscount(10);
-      setCouponMessage("Coupon applied successfully!");
-      setIsCouponValid(true);
-    } else {
-      setCouponMessage("Invalid coupon code.");
-      setIsCouponValid(false);
-    }
-  };
-
   return (
     <>
-      <HeaderPage />
       <div className="bg-dark-white">
         <div
           className="overlay-bg"
@@ -95,7 +81,9 @@ export default function CartPreview() {
                         <Link href="../">Home</Link>
                       </li>
                       <li>Shopping Cart</li>
-                      <li><HandleBack /></li>
+                      <li>
+                        <HandleBack />
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -160,7 +148,9 @@ export default function CartPreview() {
                                   </tr>
                                 ) : (
                                   cart.map((item, index) => {
-                                    const numericPrice = parsePrice(item.price.toString());
+                                    const numericPrice = parsePrice(
+                                      item.price.toString()
+                                    );
                                     const total = numericPrice * item.quantity;
 
                                     return (
@@ -203,7 +193,9 @@ export default function CartPreview() {
                                           <div className="cart-plus-minus">
                                             <div
                                               className="dec qtybutton"
-                                              onClick={() => decrementQuantity(index)}
+                                              onClick={() =>
+                                                decrementQuantity(index)
+                                              }
                                             >
                                               -
                                             </div>
@@ -216,7 +208,9 @@ export default function CartPreview() {
                                             />
                                             <div
                                               className="inc qtybutton"
-                                              onClick={() => incrementQuantity(index)}
+                                              onClick={() =>
+                                                incrementQuantity(index)
+                                              }
                                             >
                                               +
                                             </div>
@@ -228,7 +222,9 @@ export default function CartPreview() {
                                         <td className="product-remove">
                                           <Link
                                             href="#"
-                                            onClick={() => handleRemoveItem(index)}
+                                            onClick={() =>
+                                              handleRemoveItem(index)
+                                            }
                                           >
                                             <Delete className="relative rounded-full bg-red-800 p-1 text-gray-100 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" />
                                           </Link>
@@ -285,41 +281,6 @@ export default function CartPreview() {
                                   </tr>
                                 </tbody>
                               </table>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-md-6">
-                            <div className="customer-login mt-30">
-                              <h4 className="title-1 title-border text-uppercase">
-                                Coupon Discount
-                              </h4>
-                              <p className="text-gray">
-                                Enter your coupon code if you have one!
-                              </p>
-                              <input
-                                type="text"
-                                placeholder="Enter your code here."
-                                value={couponCode}
-                                onChange={(e) => setCouponCode(e.target.value)}
-                              />
-                              <button
-                                onClick={handleApplyCoupon}
-                                data-text="apply coupon"
-                                className="button-one submit-button mt-15"
-                              >
-                                Apply Coupon
-                              </button>
-                              {couponMessage && (
-                                <p
-                                  className="mt-10"
-                                  style={{
-                                    color: isCouponValid ? "green" : "red",
-                                  }}
-                                >
-                                  {couponMessage}
-                                </p>
-                              )}
                             </div>
                           </div>
                         </div>
