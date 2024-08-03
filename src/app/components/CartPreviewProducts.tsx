@@ -5,7 +5,14 @@ import Image from "next/image";
 import { Delete } from "@mui/icons-material";
 import { useCart } from "./CartContext";
 
-const ProductList = ({
+interface ProductListProps {
+  handleRemoveItem: (index: number) => void;
+  incrementQuantity: (index: number) => void;
+  decrementQuantity: (index: number) => void;
+  parsePrice: (price: string) => number;
+}
+
+const ProductList: React.FC<ProductListProps> = ({
   handleRemoveItem,
   incrementQuantity,
   decrementQuantity,
