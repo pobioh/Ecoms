@@ -1,37 +1,29 @@
 "use client";
+// CartPreview.tsx
 import React, { useState } from "react";
-import HeaderPage from "../components/header/header";
 import { useCart } from "./CartContext";
 import Link from "next/link";
-import Image from "next/image";
 import HandleBack from "./BackButton";
-import CouponHandler from "./CouponHandler";
 import Wishlist from "./Wishlist";
-import CartPreviewProducts from "./CartPreviewProducts";
+import ShoppingCart from "./ShoppingCartTab";
+import Checkout from "./CheckoutTab";
+// import OrderComplete from "./OrderComplete";
+// import { CartItem } from "./types"; // Correct import
 
 export default function CartPreview() {
   const { cart, removeItem, updateQuantity } = useCart();
   const [discount, setDiscount] = useState(0);
 
   const handleRemoveItem = (index: number) => {
-    if (removeItem) {
-      removeItem(index);
-    } else {
-      console.error("removeItem is not defined in useCart");
-    }
+    removeItem(index);
   };
 
   const handleUpdateQuantity = (index: number, quantity: number) => {
-    if (updateQuantity) {
-      updateQuantity(index, quantity);
-    } else {
-      console.error("updateQuantity is not defined in useCart");
-    }
+    updateQuantity(index, quantity);
   };
 
   const incrementQuantity = (index: number) => {
-    const newQuantity = cart[index].quantity + 1;
-    handleUpdateQuantity(index, newQuantity);
+    handleUpdateQuantity(index, cart[index].quantity + 1);
   };
 
   const decrementQuantity = (index: number) => {
@@ -55,7 +47,7 @@ export default function CartPreview() {
 
   const [activeTab, setActiveTab] = useState("shopping-cart");
 
-  const handleTabClick = (tab: React.SetStateAction<string>) => {
+  const handleTabClick = (tab: string) => {
     setActiveTab(tab);
   };
 
@@ -111,7 +103,7 @@ export default function CartPreview() {
                         }
                         onClick={() => handleTabClick("shopping-cart")}
                       >
-                        shopping cart
+                        Shopping Cart
                       </a>
                     </li>
                     <li>
@@ -121,7 +113,7 @@ export default function CartPreview() {
                         className={activeTab === "wishlist" ? "active" : ""}
                         onClick={() => handleTabClick("wishlist")}
                       >
-                        wishlist
+                        Wishlist
                       </a>
                     </li>
                     <li>
@@ -131,7 +123,7 @@ export default function CartPreview() {
                         className={activeTab === "check-out" ? "active" : ""}
                         onClick={() => handleTabClick("check-out")}
                       >
-                        check out
+                        Check Out
                       </a>
                     </li>
                     <li>
@@ -143,7 +135,7 @@ export default function CartPreview() {
                         }
                         onClick={() => handleTabClick("order-complete")}
                       >
-                        order complete
+                        Order Complete
                       </a>
                     </li>
                   </ul>
@@ -155,68 +147,18 @@ export default function CartPreview() {
                       }`}
                       id="shopping-cart"
                     >
-                      <form action="#">
-                        <CartPreviewProducts
-                          handleRemoveItem={handleRemoveItem}
-                          incrementQuantity={incrementQuantity}
-                          decrementQuantity={decrementQuantity}
-                          parsePrice={parsePrice}
-                        />
-                        <div className="row">
-                          <div className="col-md-6">
-                            <CouponHandler
-                              cartSubtotal={cartSubtotal}
-                              setDiscount={setDiscount}
-                            />
-                          </div>
-                          <div className="col-md-6">
-                            <div className="customer-login payment-details mt-30">
-                              <h4 className="title-1 title-border text-uppercase">
-                                Payment Details
-                              </h4>
-                              <table>
-                                <tbody>
-                                  <tr>
-                                    <td className="text-left">Cart Subtotal</td>
-                                    <td className="text-end">
-                                      ${cartSubtotal.toFixed(2)}
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="text-left">Shipping</td>
-                                    <td className="text-end">$15.00</td>
-                                  </tr>
-                                  <tr>
-                                    <td className="text-left">VAT</td>
-                                    <td className="text-end">
-                                      ${vatAmount.toFixed(2)}
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="text-left">Discount</td>
-                                    <td className="text-end">
-                                      ${discount.toFixed(2)}
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td className="text-left">Order Total</td>
-                                    <td className="text-end">
-                                      ${orderTotal.toFixed(2)}
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                              <button
-                                onClick={() => handleTabClick("check-out")}
-                                data-text="Checkout"
-                                className="button-one submit-button mt-15"
-                              >
-                                Checkout
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
+                      <ShoppingCart
+                        cart={cart}
+                        incrementQuantity={incrementQuantity}
+                        decrementQuantity={decrementQuantity}
+                        handleRemoveItem={handleRemoveItem}
+                        cartSubtotal={cartSubtotal}
+                        vatAmount={vatAmount}
+                        orderTotal={orderTotal}
+                        discount={discount}
+                        handleTabClick={handleTabClick}
+                        setDiscount={setDiscount}
+                      />
                     </div>
                     <div
                       className={`tab-pane ${
@@ -232,7 +174,7 @@ export default function CartPreview() {
                       }`}
                       id="check-out"
                     >
-                      {/* Add check-out content here */}
+                      <Checkout cart={cart} orderTotal={orderTotal} />
                     </div>
                     <div
                       className={`tab-pane ${
@@ -240,7 +182,7 @@ export default function CartPreview() {
                       }`}
                       id="order-complete"
                     >
-                      {/* Add order-complete content here */}
+                      {/* <OrderComplete /> */}
                     </div>
                   </div>
                 </div>
