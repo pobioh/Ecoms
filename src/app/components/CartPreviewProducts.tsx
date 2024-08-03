@@ -17,7 +17,7 @@ const ProductList: React.FC<ProductListProps> = ({
   incrementQuantity,
   decrementQuantity,
   parsePrice,
-}) => {
+}: ProductListProps) => {
   const { cart } = useCart();
 
   return (
