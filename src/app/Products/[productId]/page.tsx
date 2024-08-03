@@ -106,7 +106,15 @@ export default function ProductDetailPage() {
   return (
     <>
       <HeaderPage />
-      <div className="heading-banner-area overlay-bg">
+      <div
+        className="heading-banner-area overlay-bg"
+        style={{
+          backgroundImage: `url(${product.imgSrc})`,
+          backgroundSize: "cover", // optional: to ensure the image covers the entire div
+          backgroundPosition: "center", // optional: to center the image
+          backgroundRepeat: "no-repeat", // optional: to avoid repeating the image
+        }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-md-12">

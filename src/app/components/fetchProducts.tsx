@@ -9,6 +9,7 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import AddToCartBtn from "./CartIcon";
 import Image from "next/image";
 import WishlistIcon from "./WishlistIcon"; // Import the WishlistIcon component
+import { Box, Skeleton } from "@mui/material";
 
 const ProductPage = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -16,6 +17,7 @@ const ProductPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [priceRange, setPriceRange] = useState<number[]>([10, 5000]);
   const [wishlist, setWishlist] = useState<number[]>([]); // State for managing wishlist
+  const [loading, setLoading] = useState(true); // State for loading
   const router = useRouter(); // Use useRouter here
 
   useEffect(() => {
@@ -26,13 +28,15 @@ const ProductPage = () => {
         setProducts(data);
       } catch (error) {
         console.error("Failed to fetch products:", error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching is done
       }
     };
 
     fetchProducts();
   }, []);
 
-  const productsPerPage = 5;
+  const productsPerPage = 6;
 
   const filteredProducts = products.filter((product) => {
     const price = parseFloat(product.price);
@@ -83,171 +87,194 @@ const ProductPage = () => {
     <>
       <PriceRange onChange={setPriceRange} />
       <div>
-        <div className="product-option mb-30 clearfix">
-          <ul className="nav d-block shop-tab">
-            <li>
-              <button
-                className={`btn ${view === "grid" ? "active" : ""}`}
-                onClick={() => setView("grid")}
-              >
-                <Apps />
-              </button>
-            </li>
-            <li>
-              <button
-                className={`btn ${view === "list" ? "active" : ""}`}
-                onClick={() => setView("list")}
-              >
-                <ViewList />
-              </button>
-            </li>
-          </ul>
-          <div className="showing text-end d-none d-md-block">
-            <p className="mb-0">
-              Showing {indexOfFirstProduct + 1}-
-              {Math.min(indexOfLastProduct, totalResults)} of {totalResults}{" "}
-              Results
-            </p>
+        {loading ? (
+          <div className="row">
+            {Array.from({ length: 9 }).map((_, index) => (
+              <div key={index} className="col-lg-4 col-md-6">
+                <Skeleton variant="rectangular" width={210} height={118} />
+                <Box sx={{ pt: 0.5 }}>
+                  <Skeleton />
+                  <Skeleton width="60%" />
+                </Box>
+              </div>
+            ))}
           </div>
-        </div>
-        <div className="tab-content">
-          {view === "grid" ? (
-            <div className="tab-pane active" id="grid-view">
-              <div className="row">
-                {currentProducts.map((product) => (
-                  <div key={product.id} className="col-lg-4 col-md-6">
-                    <div
-                      className="single-product"
-                      onClick={() => handleProductClick(product.id)}
-                    >
-                      <div className="product-img">
-                        <span className={`pro-label ${product.label}-label`}>
-                          {product.label}
-                        </span>
-                        <span className="pro-price-2">${product.price}</span>
-                        <Link
-                          href="Products"
-                          onClick={() => handleProductClick(product.id)}
-                        >
-                          <Image
-                            src={product.imgSrc}
-                            alt={product.name}
-                            layout="responsive"
-                            width={500}
-                            height={300}
-                          />
-                        </Link>
-                      </div>
-                      <div className="product-info clearfix text-center">
-                        <div className="fix">
-                          <h4 className="post-title">
-                            <a href="#">{product.name}</a>
-                          </h4>
-                        </div>
-                        <div className="fix">
-                          <span className="pro-rating">
-                            {renderStars(product.rating)}
-                            <span>({product.rating} Rating)</span>
-                          </span>
-                        </div>
-                        <div className="product-action clearfix">
-                          <WishlistIcon
-                            productId={Number(product.id)}
-                            title={product.name}
-                            price={product.price.toString()} // Ensure price is a string
-                            imgSrc={product.imgSrc}
-                            isInWishlist={wishlist.includes(product.id)}
-                            onToggleWishlist={handleWishlistToggle}
-                          />
-                          <a
-                            href={`Products/${product.id}`}
-                            data-bs-toggle="modal"
-                            data-bs-target="#productModal"
-                            title="Quick View"
-                          >
-                            <SearchOff />
-                          </a>
-                          <AddToCartBtn
-                            imgSrc={product.imgSrc}
-                            title={product.name}
-                            price={product.price.toString()} // Ensure price is a string
-                            rating={product.rating}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+        ) : (
+          <>
+            <div className="product-option mb-30 clearfix">
+              <ul className="nav d-block shop-tab">
+                <li>
+                  <button
+                    className={`btn ${view === "grid" ? "active" : ""}`}
+                    onClick={() => setView("grid")}
+                  >
+                    <Apps />
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className={`btn ${view === "list" ? "active" : ""}`}
+                    onClick={() => setView("list")}
+                  >
+                    <ViewList />
+                  </button>
+                </li>
+              </ul>
+              <div className="showing text-end d-none d-md-block">
+                <p className="mb-0">
+                  Showing {indexOfFirstProduct + 1}-
+                  {Math.min(indexOfLastProduct, totalResults)} of {totalResults}{" "}
+                  Results
+                </p>
               </div>
             </div>
-          ) : (
-            <div className="tab-pane active" id="list-view">
-              {currentProducts.map((product) => (
-                <div key={product.id} className="single-product list-view">
+            <div className="tab-content">
+              {view === "grid" ? (
+                <div className="tab-pane active" id="grid-view">
                   <div className="row">
-                    <div className="col-lg-4 col-md-6">
-                      <div className="product-img">
-                        <span className={`pro-label ${product.label}-label`}>
-                          {product.label}
-                        </span>
-                        <span className="pro-price-2">${product.price}</span>
-                        <Link href={`Products/${product.id}`}>
-                          <Image
-                            src={product.imgSrc}
-                            alt={product.name}
-                            layout="responsive"
-                            width={500}
-                            height={300}
-                          />
-                        </Link>
+                    {currentProducts.map((product) => (
+                      <div key={product.id} className="col-lg-4 col-md-6">
+                        <div
+                          className="single-product"
+                          onClick={() => handleProductClick(product.id)}
+                        >
+                          <div className="product-img">
+                            <span
+                              className={`pro-label ${product.label}-label`}
+                            >
+                              {product.label}
+                            </span>
+                            <span className="pro-price-2">
+                              ${product.price}
+                            </span>
+                            <Link
+                              href="Products"
+                              onClick={() => handleProductClick(product.id)}
+                            >
+                              <Image
+                                src={product.imgSrc}
+                                alt={product.name}
+                                layout="responsive"
+                                width={500}
+                                height={300}
+                              />
+                            </Link>
+                          </div>
+                          <div className="product-info clearfix text-center">
+                            <div className="fix">
+                              <h4 className="post-title">
+                                <a href="#">{product.name}</a>
+                              </h4>
+                            </div>
+                            <div className="fix">
+                              <span className="pro-rating">
+                                {renderStars(product.rating)}
+                                <span>({product.rating} Rating)</span>
+                              </span>
+                            </div>
+                            <div className="product-action clearfix">
+                              <WishlistIcon
+                                productId={Number(product.id)}
+                                title={product.name}
+                                price={product.price.toString()} // Ensure price is a string
+                                imgSrc={product.imgSrc}
+                                isInWishlist={wishlist.includes(product.id)}
+                                onToggleWishlist={handleWishlistToggle}
+                              />
+                              <a
+                                href={`Products/${product.id}`}
+                                data-bs-toggle="modal"
+                                data-bs-target="#productModal"
+                                title="Quick View"
+                              >
+                                <SearchOff />
+                              </a>
+                              <AddToCartBtn
+                                imgSrc={product.imgSrc}
+                                title={product.name}
+                                price={product.price.toString()} // Ensure price is a string
+                                rating={product.rating}
+                              />
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-lg-8 col-md-6">
-                      <div className="product-info clearfix">
-                        <div className="fix">
-                          <h4 className="post-title">
-                            <a href="#">{product.name}</a>
-                          </h4>
-                        </div>
-                        <div className="fix">
-                          <span className="pro-rating">
-                            {renderStars(product.rating)}
-                            <span>({product.rating} Rating)</span>
-                          </span>
-                        </div>
-                        <div className="product-action clearfix">
-                          <WishlistIcon
-                            productId={Number(product.id)}
-                            title={product.name}
-                            price={product.price.toString()} // Ensure price is a string
-                            imgSrc={product.imgSrc}
-                            isInWishlist={wishlist.includes(product.id)}
-                            onToggleWishlist={handleWishlistToggle}
-                          />
-                          <a
-                            href={`Products/${product.id}`}
-                            data-bs-toggle="modal"
-                            data-bs-target="#productModal"
-                            title="Quick View"
-                          >
-                            <SearchOff />
-                          </a>
-                        </div>
-                        <p className="mt-10">{product.description}</p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
-              ))}
+              ) : (
+                <div className="tab-pane active" id="list-view">
+                  {currentProducts.map((product) => (
+                    <div key={product.id} className="single-product list-view">
+                      <div className="row">
+                        <div className="col-lg-4 col-md-6">
+                          <div className="product-img">
+                            <span
+                              className={`pro-label ${product.label}-label`}
+                            >
+                              {product.label}
+                            </span>
+                            <span className="pro-price-2">
+                              ${product.price}
+                            </span>
+                            <Link href={`Products/${product.id}`}>
+                              <Image
+                                src={product.imgSrc}
+                                alt={product.name}
+                                layout="responsive"
+                                width={500}
+                                height={300}
+                              />
+                            </Link>
+                          </div>
+                        </div>
+                        <div className="col-lg-8 col-md-6">
+                          <div className="product-info clearfix">
+                            <div className="fix">
+                              <h4 className="post-title">
+                                <a href="#">{product.name}</a>
+                              </h4>
+                            </div>
+                            <div className="fix">
+                              <span className="pro-rating">
+                                {renderStars(product.rating)}
+                                <span>({product.rating} Rating)</span>
+                              </span>
+                            </div>
+                            <div className="product-action clearfix">
+                              <WishlistIcon
+                                productId={Number(product.id)}
+                                title={product.name}
+                                price={product.price.toString()} // Ensure price is a string
+                                imgSrc={product.imgSrc}
+                                isInWishlist={wishlist.includes(product.id)}
+                                onToggleWishlist={handleWishlistToggle}
+                              />
+                              <a
+                                href={`Products/${product.id}`}
+                                data-bs-toggle="modal"
+                                data-bs-target="#productModal"
+                                title="Quick View"
+                              >
+                                <SearchOff />
+                              </a>
+                            </div>
+                            <p className="mt-10">{product.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             </div>
-          )}
-
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        </div>
+          </>
+        )}
       </div>
     </>
   );
