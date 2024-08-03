@@ -101,7 +101,7 @@ export default function CartPreview() {
                         className={
                           activeTab === "shopping-cart" ? "active" : ""
                         }
-                        onClick={() => handleTabClick("shopping-cart")}
+                        // onClick={() => handleTabClick("shopping-cart")}
                       >
                         Shopping Cart
                       </a>
@@ -121,7 +121,7 @@ export default function CartPreview() {
                         style={{ cursor: "pointer" }}
                         data-bs-toggle="tab"
                         className={activeTab === "check-out" ? "active" : ""}
-                        onClick={() => handleTabClick("check-out")}
+                        // onClick={() => handleTabClick("check-out")}
                       >
                         Check Out
                       </a>
@@ -133,7 +133,7 @@ export default function CartPreview() {
                         className={
                           activeTab === "order-complete" ? "active" : ""
                         }
-                        onClick={() => handleTabClick("order-complete")}
+                        // onClick={() => handleTabClick("order-complete")}
                       >
                         Order Complete
                       </a>
@@ -174,9 +174,7 @@ export default function CartPreview() {
                       }`}
                       id="check-out"
                     >
-                       
-                      <Checkout
-                      cart={cart} orderTotal={orderTotal} />
+                      <Checkout cart={cart} orderTotal={orderTotal} />
                     </div>
                     <div
                       className={`tab-pane ${
