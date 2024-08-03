@@ -223,6 +223,7 @@ export default function CartPreview() {
                                 </tbody>
                               </table>
                               <button
+                              type="button"
                                 onClick={() => handleTabClick("check-out")}
                                 data-text="Checkout"
                                 className="button-one submit-button mt-15"
