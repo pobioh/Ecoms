@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 interface CartItem {
+  [x: string]: any;
   color?: string;
   size?: string;
   imgSrc: string;

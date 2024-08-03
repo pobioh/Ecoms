@@ -18,7 +18,8 @@ const Pagination: React.FC<PaginationProps> = ({
       <div className="pagination" style={{ background: "transparent" }}>
         <ul>
           <li>
-            <a
+            <a 
+                href="#productList"
               onClick={(event) => {
                 event.preventDefault();
                 if (currentPage > 1) onPageChange(currentPage - 1);
@@ -31,7 +32,7 @@ const Pagination: React.FC<PaginationProps> = ({
           {[...Array(totalPages)].map((_, index) => (
             <li key={index}>
               <a
-                href="#"
+                href="#productList"
                 className={currentPage === index + 1 ? "active" : ""}
                 onClick={(event) => {
                   event.preventDefault();
@@ -44,6 +45,7 @@ const Pagination: React.FC<PaginationProps> = ({
           ))}
           <li>
             <a
+            href="#productList"
               onClick={(event) => {
                 event.preventDefault();
                 if (currentPage < totalPages) onPageChange(currentPage + 1);

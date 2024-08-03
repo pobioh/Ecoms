@@ -13,6 +13,9 @@ import Image from "next/image";
 import ImageModal from "./modal";
 import "./style.css";
 import WishlistIcon from "@/app/components/WishlistIcon";
+import NotFound from "@/app/not-found";
+
+// New component for product not found
 
 export default function ProductDetailPage() {
   const { productId } = useParams(); // Get the product ID from the URL
@@ -51,7 +54,7 @@ export default function ProductDetailPage() {
     setIsInWishlist(!isInWishlist);
   };
 
-  if (!product) return null;
+  if (!product) return <NotFound />;
 
   // assuming multi picture
   const productImages = [

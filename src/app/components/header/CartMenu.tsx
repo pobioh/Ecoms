@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import { Menu } from "@headlessui/react";
-import { ShoppingCart, Delete } from "@mui/icons-material";
+import { ShoppingCart, Delete, Close } from "@mui/icons-material";
 import { Alert } from "@mui/material";
 import { useCart } from "../CartContext"; // Ensure this path is correct
 import Link from "next/link";
@@ -129,8 +129,7 @@ export default function CartMenu() {
                 <div className="text-sm text-gray-700">
                   <Alert severity="success">
                     <p className="mb-0">
-                      You have <span>{cart.length} items</span> in your shopping
-                      bag
+                      You have <b>{cart.length} items</b> in your shopping bag
                     </p>
                   </Alert>
                 </div>
@@ -147,24 +146,31 @@ export default function CartMenu() {
                           width={500}
                           height={300}
                         />
-                        <div className="flex-1">
-                          <h5 className="text-sm font-semibold">
-                            {item.title}
-                          </h5>
-                          <p className="text-xs">
-                            Price: $
-                            {isNaN(numericPrice)
-                              ? "0.00"
-                              : numericPrice.toFixed(2)}
-                          </p>
-                          <p className="text-xs">Qty: {item.quantity}</p>
-                        </div>
+                        <Link
+                          href={`Products/${item.id}`}
+                          className="flex items-center mb-2"
+                        >
+                          <div className="flex-1">
+                            <h5 className="text-sm font-semibold">
+                              {item.title}
+                            </h5>
+                            <p className="text-xs">
+                              Price: $
+                              {isNaN(numericPrice)
+                                ? "0.00"
+                                : numericPrice.toFixed(2)}
+                            </p>
+                            <p className="text-xs">Qty: {item.quantity}</p>
+                          </div>
+                        </Link>
                         <span
-                          className="text-red-600 cursor-pointer ml-2"
+                          className="text-red-600 cursor-pointer ml-4"
                           onClick={() => handleRemoveItem(index)}
                         >
-                          <Delete />
+                          <Close style={{ float: "right" }} />
                         </span>
+
+                        <hr />
                       </div>
                     );
                   })}
