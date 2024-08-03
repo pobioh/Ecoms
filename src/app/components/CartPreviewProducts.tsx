@@ -1,9 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import HeaderPage from "../components/header/header";
 import { useCart } from "./CartContext";
 import Link from "next/link";
-import Image from "next/image";
 import HandleBack from "./BackButton";
 import CouponHandler from "./CouponHandler";
 import Wishlist from "./Wishlist";
@@ -223,7 +221,7 @@ export default function CartPreview() {
                                 </tbody>
                               </table>
                               <button
-                              type="button"
+                                type="button"
                                 onClick={() => handleTabClick("check-out")}
                                 data-text="Checkout"
                                 className="button-one submit-button mt-15"
