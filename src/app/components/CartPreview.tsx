@@ -148,6 +148,7 @@ export default function CartPreview() {
                       id="shopping-cart"
                     >
                       <ShoppingCart
+                        // @ts-ignore
                         cart={cart}
                         incrementQuantity={incrementQuantity}
                         decrementQuantity={decrementQuantity}
@@ -174,7 +175,10 @@ export default function CartPreview() {
                       }`}
                       id="check-out"
                     >
-                      <Checkout cart={cart} orderTotal={orderTotal} />
+                       
+                      <Checkout
+                      // @ts-ignore 
+                      cart={cart} orderTotal={orderTotal} />
                     </div>
                     <div
                       className={`tab-pane ${

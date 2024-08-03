@@ -1,3 +1,5 @@
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+
 // types.ts
 export interface CartItem {
     title: string;

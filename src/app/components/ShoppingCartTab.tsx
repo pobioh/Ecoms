@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Delete } from "@mui/icons-material";
 import { CartItem } from "./types"; // Correct import
+import CouponHandler from "./CouponHandler";
 
 interface ShoppingCartProps {
   cart: CartItem[];
@@ -168,6 +169,7 @@ export default function ShoppingCart({
                 </tbody>
               </table>
               <button
+                type="button"
                 onClick={() => handleTabClick("check-out")}
                 data-text="Checkout"
                 className="button-one submit-button mt-15"
