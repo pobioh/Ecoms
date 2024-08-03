@@ -25,7 +25,7 @@ export default function AllProducts() {
 
   return (
     <>
-      <div className="product-area pt-10 product-style-2">
+      <div className="product-area m-6 pt-10 product-style-2">
         <div className="container">
           <div className="row">
             <div className="col-lg-3 order-lg-1">

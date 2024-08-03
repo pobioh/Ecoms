@@ -17,7 +17,10 @@ export default function HomePage() {
       <br />
       <br />
       <SectionMenu />
-      <TrendingPage />
+      <div id="trending">
+        <TrendingPage />
+      </div>
+
       <Discount />
       <br />
       <br />

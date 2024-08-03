@@ -41,7 +41,7 @@ const products = [
 
 const TrendingPage: React.FC = () => {
   return (
-    <div className="product-area pt-40 pb-35">
+    <div className="product-area pt-40 m-6 pb-35">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">

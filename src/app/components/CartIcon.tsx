@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { ShoppingBasketRounded, ShoppingCart } from "@mui/icons-material";
 import { useCart } from "./CartContext"; // Adjust the path accordingly
+import { CircularProgress } from "@mui/material";
 
 interface ProductProps {
   imgSrc: string;
@@ -20,6 +21,7 @@ const AddToCartBtn: React.FC<ProductProps> = ({
 }) => {
   const { addToCart } = useCart();
   const [isAdded, setIsAdded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const parsePrice = (priceString: string | number) => {
     const priceStr =
@@ -28,6 +30,7 @@ const AddToCartBtn: React.FC<ProductProps> = ({
   };
 
   const handleAddToCart = () => {
+    setIsLoading(true);
     const numericPrice = parsePrice(price);
     addToCart({
       imgSrc,
@@ -38,6 +41,9 @@ const AddToCartBtn: React.FC<ProductProps> = ({
       size: undefined,
     });
     setIsAdded(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000); // Simulate loading time
   };
 
   return (
@@ -46,8 +52,15 @@ const AddToCartBtn: React.FC<ProductProps> = ({
       data-bs-toggle="tooltip"
       data-placement="top"
       title="Add To Cart"
+      style={{ position: "relative" }}
     >
-      {isAdded ? <ShoppingBasketRounded /> : <ShoppingCart />}
+      {isLoading ? (
+        <CircularProgress style={{ fontSize: "20px" }} /> // Replace with your preloader component
+      ) : isAdded ? (
+        <ShoppingBasketRounded />
+      ) : (
+        <ShoppingCart />
+      )}
     </a>
   );
 };
