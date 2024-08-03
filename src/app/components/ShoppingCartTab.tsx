@@ -37,7 +37,7 @@ export default function ShoppingCart({
   return (
     <>
       <form action="#">
-        <div className="shop-cart-table">
+        <div className="shop-cart-table" id="shoppingTab">
           <div className="table-content table-responsive">
             <table>
               <thead>
@@ -168,14 +168,14 @@ export default function ShoppingCart({
                   </tr>
                 </tbody>
               </table>
-              <button
-                type="button"
+              <a
+                href="#shoppingTab"
                 onClick={() => handleTabClick("check-out")}
                 data-text="Checkout"
                 className="button-one submit-button mt-15"
               >
                 Checkout
-              </button>
+              </a>
             </div>
           </div>
         </div>
