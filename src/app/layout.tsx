@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Head from "next/head";
-import { CartProvider } from "./components/CartContext"; // Ensure the correct path
+import ClientLayout from "./ClientLayout"; // Import the client-side layout
+
 import "../../public/css/bootstrap.min.css";
 import "../../public/css/animate.min.css";
 // import "../../public/css/jquery-ui.min.css";
@@ -32,7 +33,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <title>My App</title>
       </Head>
       <body>
-        <CartProvider>{children}</CartProvider>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

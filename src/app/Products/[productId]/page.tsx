@@ -14,9 +14,6 @@ import ImageModal from "./modal";
 import "./style.css";
 import WishlistIcon from "@/app/components/WishlistIcon";
 import NotFound from "@/app/not-found";
-import Box from "@mui/material/Box";
-import Skeleton from "@mui/material/Skeleton";
-import PagePreloader from "@/app/components/Pagepreloader";
 
 export default function ProductDetailPage() {
   const { productId } = useParams(); // Get the product ID from the URL
@@ -106,14 +103,6 @@ export default function ProductDetailPage() {
     const newQuantity = cart[index].quantity > 1 ? cart[index].quantity - 1 : 1;
     handleUpdateQuantity(index, newQuantity);
   };
-
-  if (loading) {
-    return (
-      <div className="row">
-        <PagePreloader />
-      </div>
-    );
-  }
 
   if (!product) return <NotFound />;
 
