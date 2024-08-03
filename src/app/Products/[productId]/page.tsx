@@ -14,17 +14,18 @@ import ImageModal from "./modal";
 import "./style.css";
 import WishlistIcon from "@/app/components/WishlistIcon";
 import NotFound from "@/app/not-found";
-
-// New component for product not found
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
+import PagePreloader from "@/app/components/Pagepreloader";
 
 export default function ProductDetailPage() {
   const { productId } = useParams(); // Get the product ID from the URL
   const [product, setProduct] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const { cart, addToCart, updateQuantity } = useCart();
   const [isInWishlist, setIsInWishlist] = useState<boolean>(false);
-
   const [activeTab, setActiveTab] = useState("");
 
   const handleTabClick = (tab: React.SetStateAction<string>) => {
@@ -41,8 +42,10 @@ export default function ProductDetailPage() {
           }
           const data = await response.json();
           setProduct(data);
+          setLoading(false); // Set loading to false once the data is fetched
         } catch (error) {
           console.error("Failed to fetch product details:", error);
+          setLoading(false); // Set loading to false even if there is an error
         }
       };
 
@@ -53,8 +56,6 @@ export default function ProductDetailPage() {
   const onToggleWishlist = (productId: number) => {
     setIsInWishlist(!isInWishlist);
   };
-
-  if (!product) return <NotFound />;
 
   // assuming multi picture
   const productImages = [
@@ -105,6 +106,16 @@ export default function ProductDetailPage() {
     const newQuantity = cart[index].quantity > 1 ? cart[index].quantity - 1 : 1;
     handleUpdateQuantity(index, newQuantity);
   };
+
+  if (loading) {
+    return (
+      <div className="row">
+        <PagePreloader />
+      </div>
+    );
+  }
+
+  if (!product) return <NotFound />;
 
   return (
     <>
