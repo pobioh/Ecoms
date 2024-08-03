@@ -7,7 +7,6 @@ import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { CartItem } from "./types"; // Correct import
 import CreditCardForm from "./CardDetails";
-import ShippingAddress from "./ShippingAddress";
 import CheckoutInfo from "./CheckoutInformation";
 
 interface CheckoutProps {

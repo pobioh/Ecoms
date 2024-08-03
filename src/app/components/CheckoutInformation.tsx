@@ -1,11 +1,6 @@
 import * as React from "react";
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import Switch from "@mui/joy/Switch";
-import LocalFireDepartmentRoundedIcon from "@mui/icons-material/LocalFireDepartmentRounded";
-import WavesRoundedIcon from "@mui/icons-material/WavesRounded";
 import ShippingAddress from "./ShippingAddress";
-import { CarCrash, Flight, Store } from "@mui/icons-material";
-import { Alert } from "@mui/material";
+import DeliveryOptions from "./SelectDeliveryType";
 
 export default function CheckoutInfo() {
   const [dark, setDark] = React.useState<boolean>(false);
@@ -14,40 +9,7 @@ export default function CheckoutInfo() {
     <>
       <form>
         <div className="space-y-12">
-          <div className="border-b border-gray-900/10 pb-12">
-            <div className="card p-4">
-              <center>
-                <Alert severity="info" className="">
-                  How would you like to get your Item?
-                </Alert>
-              </center>
-              <br />
-              <Switch
-                color={dark ? "primary" : "danger"}
-                slotProps={{ input: { "aria-label": "dark mode" } }}
-                startDecorator={
-                  <>
-                    <small>Pickup</small>
-                    <Store
-                      sx={{ color: dark ? "text.tertiary" : "danger.600" }}
-                    />
-                  </>
-                }
-                endDecorator={
-                  <>
-                    <small>Delivery</small>
-                    <Flight
-                      sx={{ color: dark ? "primary.500" : "text.tertiary" }}
-                    />
-                  </>
-                }
-                checked={dark}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setDark(event.target.checked)
-                }
-              />
-            </div>
-          </div>
+          <DeliveryOptions dark={dark} setDark={setDark} />
 
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -130,7 +92,7 @@ export default function CheckoutInfo() {
                 </div>
               </div>
             </div>
-
+            <DeliveryOptions dark={dark} setDark={setDark} />
             {/* Conditionally render ShippingAddress component */}
             {dark && <ShippingAddress />}
           </div>
