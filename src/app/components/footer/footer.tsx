@@ -1,3 +1,13 @@
+import { CheckBadgeIcon } from "@heroicons/react/24/outline";
+import {
+  Adjust,
+  Check,
+  Dashboard,
+  FavoriteBorder,
+  Lock,
+  Payment,
+  ShoppingBag,
+} from "@mui/icons-material";
 import Link from "next/link";
 
 export default function Footer() {
@@ -31,27 +41,32 @@ export default function Footer() {
                   <ul className="footer-menu">
                     <li>
                       <Link href="#">
-                        <i className="zmdi zmdi-dot-circle"></i>My Account
+                        <Dashboard className="p-1" />
+                        My Account
                       </Link>
                     </li>
                     <li>
                       <Link href="/Cart#wishlist">
-                        <i className="zmdi zmdi-dot-circle"></i>My Wishlist
+                        <FavoriteBorder className="p-1" />
+                        My Wishlist
                       </Link>
                     </li>
                     <li>
                       <Link href="/Cart">
-                        <i className="zmdi zmdi-dot-circle"></i>My Cart
+                        <ShoppingBag className="p-1" />
+                        My Cart
                       </Link>
                     </li>
                     <li>
                       <Link href="#">
-                        <i className="zmdi zmdi-dot-circle"></i>Sign In
+                        <Lock className="p-1" />
+                        Sign In
                       </Link>
                     </li>
                     <li>
                       <Link href="#">
-                        <i className="zmdi zmdi-dot-circle"></i>Check out
+                        <Payment className="p-1" />
+                        Check out
                       </Link>
                     </li>
                   </ul>
@@ -63,27 +78,32 @@ export default function Footer() {
                   <ul className="footer-menu">
                     <li>
                       <Link href="../#trending">
-                        <i className="zmdi zmdi-dot-circle"></i>New Products
+                        <Adjust className="p-1" />
+                        New Products
                       </Link>
                     </li>
                     <li>
                       <Link href="#">
-                        <i className="zmdi zmdi-dot-circle"></i>Top Sellers
+                        <Adjust className="p-1" />
+                        Top Sellers
                       </Link>
                     </li>
                     <li>
                       <Link href="#">
-                        <i className="zmdi zmdi-dot-circle"></i>Manufactirers
+                        <Adjust className="p-1" />
+                        Manufactirers
                       </Link>
                     </li>
                     <li>
                       <Link href="#">
-                        <i className="zmdi zmdi-dot-circle"></i>Suppliers
+                        <Adjust className="p-1" />
+                        Suppliers
                       </Link>
                     </li>
                     <li>
                       <Link href="#">
-                        <i className="zmdi zmdi-dot-circle"></i>Specials
+                        <Adjust className="p-1" />
+                        Specials
                       </Link>
                     </li>
                   </ul>
