@@ -34,7 +34,7 @@ export default function NotFound() {
           <div className="row">
             <div className="col-lg-12">
               <div className="error-content text-center">
-                <img src="img/bg/error.png" alt="" />
+                {/* <img src="img/bg/error.png" alt="" /> */}
                 <h4 className="text-light-black mt-60">Ooops.... Error 404</h4>
                 <h5 className="text-light-black">
                   Sorry, But the page you are looking for does't exist
