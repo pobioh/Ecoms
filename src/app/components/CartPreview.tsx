@@ -101,7 +101,7 @@ export default function CartPreview() {
                         className={
                           activeTab === "shopping-cart" ? "active" : ""
                         }
-                        // onClick={() => handleTabClick("shopping-cart")}
+                        onClick={() => handleTabClick("shopping-cart")}
                       >
                         Shopping Cart
                       </a>
