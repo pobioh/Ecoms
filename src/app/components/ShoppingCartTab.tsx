@@ -1,10 +1,10 @@
-// ShoppingCartTab.tsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Delete } from "@mui/icons-material";
 import { CartItem } from "./types"; // Correct import
 import CouponHandler from "./CouponHandler";
+import PreloaderTable from "./Preloader";
 
 interface ShoppingCartProps {
   cart: CartItem[];
@@ -31,8 +31,23 @@ export default function ShoppingCart({
   handleTabClick,
   setDiscount,
 }: ShoppingCartProps) {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a fetch or some processing delay
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Adjust the delay as needed
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const parsePrice = (priceString: string) =>
     parseFloat(priceString.replace(/[^0-9.-]+/g, ""));
+
+  if (loading) {
+    return <PreloaderTable />;
+  }
 
   return (
     <>
