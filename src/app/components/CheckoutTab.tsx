@@ -15,7 +15,7 @@ interface CheckoutProps {
 
 export default function Checkout({ cart, orderTotal }: CheckoutProps) {
   return (
-    <Card sx={{ width: 520 }}>
+    <Card sx={{ width: 350 }}>
       <div>
         <Typography level="title-lg">Checkout Preview</Typography>
         <IconButton
@@ -41,8 +41,8 @@ export default function Checkout({ cart, orderTotal }: CheckoutProps) {
                 src={item.imgSrc}
                 alt={item.title}
                 layout="responsive"
-                width={500}
-                height={300}
+                width={10}
+                height={10}
               />
             </div>
           )
