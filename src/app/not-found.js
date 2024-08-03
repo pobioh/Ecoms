@@ -29,37 +29,7 @@ export default function NotFound() {
         </div>
       </div>
 
-      <div className="area-404 pt-80 pb-80">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="error-content text-center">
-                {/* <img src="img/bg/error.png" alt="" /> */}
-                <h4 className="text-light-black mt-60">Ooops.... Error 404</h4>
-                <h5 className="text-light-black">
-                  Sorry, But the page you are looking for does't exist
-                </h5>
-                <div className="error-form mt-30 mb-30">
-                  <form action="#">
-                    <input type="text" placeholder="Search here..." />
-                    <button type="submit">
-                      <i className="zmdi zmdi-search"></i>
-                    </button>
-                  </form>
-                </div>
-                <p className="text-uppercase">Or</p>
-                <a
-                  className="button-one submit-btn-4 go-to-home bg-white text-uppercase text-light-black"
-                  href="index.html"
-                  data-text="go to home page"
-                >
-                  go to home page
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
       <Footer />
     </>
   );
