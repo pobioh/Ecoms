@@ -15,7 +15,7 @@ interface CheckoutProps {
 
 export default function Checkout({ cart, orderTotal }: CheckoutProps) {
   return (
-    <Card sx={{ width: 350 }}>
+    <Card sx={{ width: 400 }}>
       <div>
         <Typography level="title-lg">Checkout Preview</Typography>
         <IconButton
