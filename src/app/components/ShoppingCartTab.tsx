@@ -148,51 +148,55 @@ export default function ShoppingCart({
           </div>
         </div>
         <div className="row">
-          <div className="col-md-6">
-            <CouponHandler
-              cartSubtotal={cartSubtotal}
-              setDiscount={setDiscount}
-            />
-          </div>
-          <div className="col-md-6">
-            <div className="customer-login payment-details mt-30">
-              <h4 className="title-1 title-border text-uppercase">
-                Payment Details
-              </h4>
-              <table>
-                <tbody>
-                  <tr>
-                    <td className="text-left">Cart Subtotal</td>
-                    <td className="text-end">${cartSubtotal.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="text-left">Shipping</td>
-                    <td className="text-end">$15.00</td>
-                  </tr>
-                  <tr>
-                    <td className="text-left">VAT</td>
-                    <td className="text-end">${vatAmount.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="text-left">Discount</td>
-                    <td className="text-end">${discount.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="text-left">Order Total</td>
-                    <td className="text-end">${orderTotal.toFixed(2)}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <a
-                href="#shoppingTab"
-                onClick={() => handleTabClick("check-out")}
-                data-text="Checkout"
-                className="button-one submit-button mt-15"
-              >
-                Checkout
-              </a>
-            </div>
-          </div>
+          {cart.length > 0 && (
+            <>
+              <div className="col-md-6">
+                <CouponHandler
+                  cartSubtotal={cartSubtotal}
+                  setDiscount={setDiscount}
+                />
+              </div>
+              <div className="col-md-6">
+                <div className="customer-login payment-details mt-30">
+                  <h4 className="title-1 title-border text-uppercase">
+                    Payment Details
+                  </h4>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td className="text-left">Cart Subtotal</td>
+                        <td className="text-end">${cartSubtotal.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td className="text-left">Shipping</td>
+                        <td className="text-end">$15.00</td>
+                      </tr>
+                      <tr>
+                        <td className="text-left">VAT</td>
+                        <td className="text-end">${vatAmount.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td className="text-left">Discount</td>
+                        <td className="text-end">${discount.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td className="text-left">Order Total</td>
+                        <td className="text-end">${orderTotal.toFixed(2)}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <a
+                    href="#shoppingTab"
+                    onClick={() => handleTabClick("check-out")}
+                    data-text="Checkout"
+                    className="button-one submit-button mt-15"
+                  >
+                    Checkout
+                  </a>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </form>
     </>
