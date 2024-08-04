@@ -56,7 +56,7 @@ export default function AboutUs() {
               <div className="col-lg-6">
                 <div className="about-brief bg-dark-white">
                   <h4 className="title-1 title-border text-uppercase mb-30">
-                    about hurst
+                    about Us
                   </h4>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
